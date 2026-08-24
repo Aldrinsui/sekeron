@@ -547,15 +547,35 @@ def process_video(artist_id, category, media_record, dataset_root, output_dir, i
 # --------------------------------------------------------------------------
 
 def compute_hash_groups(artists_manifest, dataset_root, warnings):
-    """Returns dict: sha256 -> sorted list of relative_path, for hashes shared
-    by 2+ files. Also returns dict: relative_path -> sha256 for every file."""
-    all_files = []
+    """Computes SHA-256 for every media file and classifies duplicate groups.
+
+    Duplicate suppression is scoped PER ARTIST ONLY:
+      - If 2+ files with the same hash belong to the SAME artist, all but one
+        (the canonical) are suppressed from independent evidence counting -
+        this is redundant evidence within one portfolio.
+      - If files with the same hash belong to DIFFERENT artists, none are
+        suppressed. Each artist keeps their own independent evidence record,
+        and every such record is flagged with a cross-artist duplicate
+        anomaly note - this is a data-integrity signal about the dataset
+        itself (e.g. mislabeled or shared source files), not redundancy
+        within a single artist's demonstrated work.
+
+    Returns:
+        duplicate_report: list of dicts describing each duplicate group
+            (sha256, paths, type: 'within_artist'|'cross_artist', artists)
+        within_artist_canonical_of: relative_path -> canonical relative_path
+            (only populated for suppressed same-artist duplicates)
+        cross_artist_flag_of: relative_path -> {"sha256", "other_source_paths",
+            "other_artists"} for every path involved in a cross-artist match
+            (both/all sides are flagged, none suppressed)
+    """
+    path_to_artist = {}
     for artist in artists_manifest:
         for m in artist["media_files"]:
-            all_files.append(m["relative_path"])
+            path_to_artist[m["relative_path"]] = artist["artist_id"]
 
     hash_of = {}
-    for rel in all_files:
+    for rel in path_to_artist:
         full_path = dataset_root / rel
         if not full_path.exists():
             warnings.append(f"File listed in manifest but not found on disk: {rel}")
@@ -566,8 +586,48 @@ def compute_hash_groups(artists_manifest, dataset_root, warnings):
     for rel, h in hash_of.items():
         groups.setdefault(h, []).append(rel)
 
-    duplicate_groups = {h: sorted(paths) for h, paths in groups.items() if len(paths) > 1}
-    return duplicate_groups, hash_of
+    duplicate_report = []
+    within_artist_canonical_of = {}
+    cross_artist_flag_of = {}
+
+    for h, paths in groups.items():
+        if len(paths) < 2:
+            continue
+        paths = sorted(paths)
+        by_artist = {}
+        for p in paths:
+            by_artist.setdefault(path_to_artist[p], []).append(p)
+        involved_artists = sorted(by_artist.keys())
+
+        # Same-artist duplicates within this hash group: suppress all but first.
+        for artist_id, plist in by_artist.items():
+            if len(plist) > 1:
+                canonical = plist[0]
+                for p in plist[1:]:
+                    within_artist_canonical_of[p] = canonical
+
+        group_type = "cross_artist" if len(involved_artists) > 1 else "within_artist"
+        duplicate_report.append({
+            "sha256": h,
+            "source_relative_paths": paths,
+            "type": group_type,
+            "artists_involved": involved_artists,
+        })
+
+        if group_type == "cross_artist":
+            # Flag every path that will actually be kept (i.e. not suppressed
+            # by same-artist canonicalization above) with a cross-artist note.
+            for artist_id, plist in by_artist.items():
+                kept_path = plist[0]  # first path is the one kept for this artist
+                other_paths = [p for p in paths if p != kept_path]
+                other_artists = sorted({path_to_artist[p] for p in other_paths})
+                cross_artist_flag_of[kept_path] = {
+                    "sha256": h,
+                    "other_source_paths": other_paths,
+                    "other_artists": other_artists,
+                }
+
+    return duplicate_report, within_artist_canonical_of, cross_artist_flag_of, hash_of
 
 
 # --------------------------------------------------------------------------
@@ -581,6 +641,7 @@ def validate_evidence_manifest(evidence_manifest, dataset_root, output_dir):
         "timestamps_within_duration": {"passed": True, "details": []},
         "extracted_assets_exist": {"passed": True, "details": []},
         "duplicate_relationships_resolve": {"passed": True, "details": []},
+        "cross_artist_duplicates_retained_independently": {"passed": True, "details": []},
         "output_outside_dataset_root": {"passed": True, "details": []},
     }
 
@@ -652,7 +713,29 @@ def validate_evidence_manifest(evidence_manifest, dataset_root, output_dir):
                         f"{ev['evidence_id']}: duplicate_of '{canon_path}' does not resolve to a canonical evidence item"
                     )
 
-    # 6. No output written inside dataset root
+    # 6. Cross-artist duplicates must be RETAINED independently (never suppressed),
+    #    and every retained copy must carry the cross-artist anomaly note.
+    for group in evidence_manifest.get("duplicate_groups", []):
+        if group["type"] != "cross_artist":
+            continue
+        for path in group["source_relative_paths"]:
+            items = [item for item in all_evidence_by_source.get(path, []) if item["status"] != "duplicate"]
+            if not items:
+                checks["cross_artist_duplicates_retained_independently"]["passed"] = False
+                checks["cross_artist_duplicates_retained_independently"]["details"].append(
+                    f"Cross-artist duplicate source '{path}' has no retained (non-suppressed) evidence item - "
+                    f"it appears to have been incorrectly suppressed."
+                )
+                continue
+            for item in items:
+                has_note = any("cross_artist_duplicate" in n for n in item.get("anomaly_notes", []))
+                if not has_note:
+                    checks["cross_artist_duplicates_retained_independently"]["passed"] = False
+                    checks["cross_artist_duplicates_retained_independently"]["details"].append(
+                        f"{item['evidence_id']} ({path}): retained but missing cross_artist_duplicate anomaly note"
+                    )
+
+    # 7. No output written inside dataset root
     try:
         output_dir.resolve().relative_to(dataset_root.resolve())
         checks["output_outside_dataset_root"]["passed"] = False
@@ -705,20 +788,18 @@ def main():
     id_alloc = EvidenceIdAllocator()
 
     print("Pass 1/2: computing SHA-256 for all media files (duplicate detection)...")
-    duplicate_groups, hash_of = compute_hash_groups(dataset_manifest["artists"], dataset_root, warnings)
-    if duplicate_groups:
-        print(f"  Found {len(duplicate_groups)} duplicate group(s):")
-        for h, paths in duplicate_groups.items():
-            print(f"    hash {h[:12]}...: {paths}")
+    duplicate_report, canonical_of, cross_artist_flag_of, hash_of = compute_hash_groups(
+        dataset_manifest["artists"], dataset_root, warnings
+    )
+    n_within = sum(1 for g in duplicate_report if g["type"] == "within_artist")
+    n_cross = sum(1 for g in duplicate_report if g["type"] == "cross_artist")
+    if duplicate_report:
+        print(f"  Found {len(duplicate_report)} duplicate group(s): {n_within} within-artist (suppressed), "
+              f"{n_cross} cross-artist (retained + flagged)")
+        for g in duplicate_report:
+            print(f"    [{g['type']}] hash {g['sha256'][:12]}...: {g['source_relative_paths']}")
     else:
         print("  No exact duplicates found.")
-
-    # Map: relative_path -> canonical relative_path (only present for duplicate members)
-    canonical_of = {}
-    for paths in duplicate_groups.values():
-        canonical = paths[0]
-        for p in paths[1:]:
-            canonical_of[p] = canonical
 
     print("Pass 2/2: selecting and extracting evidence per artist...")
     evidence_manifest = {
@@ -740,10 +821,7 @@ def main():
             "silence_anomaly_ratio": SILENCE_ANOMALY_RATIO,
             "frame_stddev_blank_threshold": FRAME_STDDEV_BLANK_THRESHOLD,
         },
-        "duplicate_groups": [
-            {"sha256": h, "source_relative_paths": paths, "canonical": paths[0]}
-            for h, paths in duplicate_groups.items()
-        ],
+        "duplicate_groups": duplicate_report,
         "warnings": warnings,
         "artists": [],
     }
@@ -804,14 +882,14 @@ def main():
                 continue
 
             if media_type == "image":
-                artist_evidence.extend(process_image(artist_id, media, dataset_root, output_dir, id_alloc, warnings))
+                new_items = process_image(artist_id, media, dataset_root, output_dir, id_alloc, warnings)
             elif media_type == "audio":
-                artist_evidence.extend(process_audio(artist_id, media, dataset_root, output_dir, id_alloc, warnings))
+                new_items = process_audio(artist_id, media, dataset_root, output_dir, id_alloc, warnings)
             elif media_type == "video":
-                artist_evidence.extend(process_video(artist_id, category, media, dataset_root, output_dir, id_alloc, warnings))
+                new_items = process_video(artist_id, category, media, dataset_root, output_dir, id_alloc, warnings)
             else:
                 eid = id_alloc.next_id(artist_id)
-                artist_evidence.append({
+                new_items = [{
                     "evidence_id": eid,
                     "artist_id": artist_id,
                     "source_relative_path": rel,
@@ -824,7 +902,23 @@ def main():
                     "status": "insufficient_evidence",
                     "anomaly_notes": [],
                     "counts_as_independent_evidence": False,
-                })
+                }]
+
+            cross_flag = cross_artist_flag_of.get(rel)
+            if cross_flag:
+                note = (
+                    f"cross_artist_duplicate:possible_data_integrity_anomaly - identical SHA-256 "
+                    f"({cross_flag['sha256'][:12]}...) also found under artist(s) "
+                    f"{', '.join(cross_flag['other_artists'])} at {cross_flag['other_source_paths']}. "
+                    f"Retained as independent evidence for this artist per policy; not treated as "
+                    f"proof of authorship, licensing, or which artist is the original source."
+                )
+                for item in new_items:
+                    item["anomaly_notes"].append(note)
+                    if item["status"] == "ok":
+                        item["status"] = "flagged_anomaly"
+
+            artist_evidence.extend(new_items)
 
         # Soft-budget check (informational only, logged not enforced retroactively)
         frame_count = sum(1 for e in artist_evidence if e["media_type"] == "video" and e["locator"].get("type") == "frame")
@@ -865,13 +959,31 @@ def main():
         log_lines.append(f"- `{k}`: {v}")
     log_lines.append("")
 
-    if evidence_manifest["duplicate_groups"]:
-        log_lines.append("## Duplicate groups (exact SHA-256 match)")
-        for g in evidence_manifest["duplicate_groups"]:
-            log_lines.append(f"- Canonical: `{g['canonical']}`")
+    within_groups = [g for g in evidence_manifest["duplicate_groups"] if g["type"] == "within_artist"]
+    cross_groups = [g for g in evidence_manifest["duplicate_groups"] if g["type"] == "cross_artist"]
+
+    if within_groups:
+        log_lines.append("## Within-artist duplicate groups (exact SHA-256 match, same artist)")
+        log_lines.append("Non-canonical copies are suppressed from independent evidence counting.")
+        for g in within_groups:
+            canonical = g["source_relative_paths"][0]
+            log_lines.append(f"- Artist {g['artists_involved'][0]} - Canonical: `{canonical}`")
+            for p in g["source_relative_paths"][1:]:
+                log_lines.append(f"    - Duplicate (excluded from independent evidence count): `{p}`")
+        log_lines.append("")
+
+    if cross_groups:
+        log_lines.append("## Cross-artist duplicate groups (exact SHA-256 match, DIFFERENT artists)")
+        log_lines.append(
+            "**Not suppressed.** Each artist retains an independent, flagged evidence record. "
+            "This is a data-integrity/provenance anomaly about the dataset - it does not by itself "
+            "indicate which artist (if any) is the original source, and must not be treated as proof "
+            "of authorship, licensing, or ownership by any downstream stage."
+        )
+        for g in cross_groups:
+            log_lines.append(f"- Artists involved: {', '.join(g['artists_involved'])} (hash `{g['sha256'][:12]}...`)")
             for p in g["source_relative_paths"]:
-                if p != g["canonical"]:
-                    log_lines.append(f"    - Duplicate (excluded from independent evidence count): `{p}`")
+                log_lines.append(f"    - `{p}`")
         log_lines.append("")
 
     log_lines.append("## Per-artist evidence summary")
