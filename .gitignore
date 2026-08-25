@@ -4,3 +4,5 @@ __pycache__/
 generated/
 .env
 .DS_Store.vscode/
+
+.DS_Store
