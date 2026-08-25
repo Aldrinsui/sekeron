@@ -28,7 +28,7 @@ from pathlib import Path
 # Add current directory to path to import local modules
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from parse_hirer_brief import parse_brief
-from recommendation_scoring import rank_artists
+from recommendation_scoring import rank_artists, build_improve_your_matches
 
 def main():
     parser = argparse.ArgumentParser(description="Update recommendation based on follow-up brief.")
@@ -93,8 +93,9 @@ def main():
     # Check that artist_category is preserved
     parsed_update["artist_category"] = orig_rec["artist_category"]
     
-    ranked_artists = rank_artists(parsed_update, all_artists)
-    
+    ranked_artists = rank_artists(parsed_update, all_artists)[:2]
+    top_two_artists = ranked_artists[:2]
+
     # Build change summary comparing old ranking and new ranking
     old_ranks = {a["artist_id"]: a["rank"] for a in orig_rec.get("ranked_artists", [])}
     new_ranks = {a["artist_id"]: a["rank"] for a in ranked_artists}
@@ -102,10 +103,12 @@ def main():
     rank_changes = {}
     for artist_id, new_rank in new_ranks.items():
         old_rank = old_ranks.get(artist_id)
-        if old_rank != new_rank:
+        if old_rank is not None and old_rank != new_rank:
             rank_changes[artist_id] = f"Moved from {old_rank} to {new_rank}"
-        else:
+        elif old_rank is not None:
             rank_changes[artist_id] = "Unchanged"
+        else:
+            rank_changes[artist_id] = f"New in top rankings (rank {new_rank})"
             
     change_summary = {
         "original_requirements_count": len(orig_rec.get("parsed_requirements", {}).get("capability_requirements", [])),
@@ -113,13 +116,25 @@ def main():
         "ranking_shifts": rank_changes,
         "is_genuine_rerank": any(old != new for old, new in zip(
             [a["artist_id"] for a in orig_rec.get("ranked_artists", [])],
-            [a["artist_id"] for a in ranked_artists]
+            [a["artist_id"] for a in top_two_artists]
         ))
     }
     
     if not change_summary["is_genuine_rerank"]:
         change_summary["notes"] = "Ranking remained identical. This means artists scored equally relatively under both the old and new criteria."
-        
+
+    improve_matches = build_improve_your_matches(parsed_update)
+
+    rec_reasons = []
+    rec_trade_offs = []
+    rec_assumptions = []
+    rec_uncertainties = []
+    for a in top_two_artists:
+        rec_reasons.extend(a.get("reasons", []))
+        rec_trade_offs.extend(a.get("trade_offs", []))
+        rec_assumptions.extend(a.get("assumptions", []))
+        rec_uncertainties.extend(a.get("uncertainty", []))
+
     out_data = {
         "generated_by": "scripts/update_recommendation.py",
         "hirer_id": args.hirer_id,
@@ -128,7 +143,13 @@ def main():
         "artist_category": parsed_update["artist_category"],
         "change_summary": change_summary,
         "updated_requirements": parsed_update,
-        "ranked_artists": ranked_artists,
+        "ranked_artists": top_two_artists,
+        "reasons": rec_reasons,
+        "trade_offs": list(dict.fromkeys(rec_trade_offs)),
+        "assumptions": list(dict.fromkeys(rec_assumptions)),
+        "uncertainty": list(dict.fromkeys(rec_uncertainties)),
+        "improve_your_matches": improve_matches,
+        "refinement_questions": improve_matches["refinement_questions"],
         "warnings": warnings
     }
     

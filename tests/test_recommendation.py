@@ -236,3 +236,98 @@ def test_full_pipeline_and_update(tmp_path):
     assert update["hirer_id"] == "H081"
     assert update["artist_category"] == "musician"
     assert "change_summary" in update
+
+    # 3. Verify top-two limit on recommendations.json and updated_recommendation.json
+    for rec in recs["recommendations"]:
+        assert len(rec["ranked_artists"]) <= 2, f"Brief {rec['hirer_id']} returned more than 2 artists"
+        assert len(rec["ranked_artists"]) == 2
+        # Check required recommendation fields
+        assert "reasons" in rec
+        assert "trade_offs" in rec
+        assert "assumptions" in rec
+        assert "uncertainty" in rec
+        assert "improve_your_matches" in rec
+        
+        # Check refinement questions limit & structure
+        improve = rec["improve_your_matches"]
+        questions = improve.get("refinement_questions", [])
+        assert len(questions) <= 2
+        assert len(questions) > 0
+        for q in questions:
+            assert "question" in q and q["question"]
+            assert "expected_impact" in q and q["expected_impact"]
+
+        # Check artist-level contextual content
+        for artist in rec["ranked_artists"]:
+            assert "reasons" in artist and len(artist["reasons"]) > 0
+            assert "trade_offs" in artist
+            assert "assumptions" in artist
+            assert "uncertainty" in artist
+
+    # Check updated recommendation top two & contextual fields
+    assert len(update["ranked_artists"]) <= 2
+    assert len(update["ranked_artists"]) == 2
+    assert "improve_your_matches" in update
+    assert len(update["improve_your_matches"]["refinement_questions"]) <= 2
+    for q in update["improve_your_matches"]["refinement_questions"]:
+        assert "question" in q and q["question"]
+        assert "expected_impact" in q and q["expected_impact"]
+
+
+def test_contextual_fields_and_refinement_questions_direct():
+    from recommendation_scoring import (
+        generate_artist_context,
+        generate_refinement_questions,
+        build_improve_your_matches,
+    )
+    parsed_brief = {
+        "hirer_id": "H081",
+        "source_file": "01_cafe_music_whatsapp.txt",
+        "artist_category": "musician",
+        "capability_requirements": [
+            {
+                "requirement_text": "Acoustic background music",
+                "mapped_dimensions": ["genre_style_signal"],
+                "importance": "must_have",
+            }
+        ],
+        "operational_constraints": [
+            {
+                "category": "budget",
+                "detail": "around 7k-9k",
+                "hard_limit": True,
+            }
+        ],
+    }
+
+    artist_rec = {
+        "artist_id": "M01",
+        "category": "musician",
+        "demonstrated_capabilities": [
+            {
+                "capability": "genre_style_signal",
+                "status": "demonstrated",
+                "confidence": "high",
+                "observation": "Demonstrated acoustic guitar and vocal style",
+            }
+        ],
+    }
+
+    ctx = generate_artist_context(parsed_brief, artist_rec, {"total_score": 3.0})
+    assert len(ctx["reasons"]) > 0
+    assert any("genre_style_signal" in r for r in ctx["reasons"])
+    assert len(ctx["assumptions"]) > 0
+    assert any("budget" in a for a in ctx["assumptions"])
+    assert len(ctx["uncertainty"]) > 0
+
+    # Test refinement questions strictly <= 2 and expected_impact exists
+    questions = generate_refinement_questions(parsed_brief)
+    assert 0 < len(questions) <= 2
+    for q in questions:
+        assert "question" in q and len(q["question"]) > 5
+        assert "expected_impact" in q and len(q["expected_impact"]) > 5
+
+    improve = build_improve_your_matches(parsed_brief)
+    assert improve["section_title"] == "Improve your matches"
+    assert len(improve["refinement_questions"]) <= 2
+

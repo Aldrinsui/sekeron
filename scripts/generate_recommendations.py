@@ -25,7 +25,7 @@ from pathlib import Path
 # Add current directory to path to import local modules
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from parse_hirer_brief import parse_brief
-from recommendation_scoring import rank_artists
+from recommendation_scoring import rank_artists, build_improve_your_matches
 
 def main():
     parser = argparse.ArgumentParser(description="Generate recommendations for hirer briefs.")
@@ -79,14 +79,34 @@ def main():
         if warnings:
             global_warnings.extend(warnings)
             
-        ranked_artists = rank_artists(parsed, all_artists)
-        
+        ranked_artists = rank_artists(parsed, all_artists)[:2]
+        top_two_artists = ranked_artists[:2]
+
+        improve_matches = build_improve_your_matches(parsed)
+
+        # Aggregate contextual fields across top recommendations
+        rec_reasons = []
+        rec_trade_offs = []
+        rec_assumptions = []
+        rec_uncertainties = []
+        for a in top_two_artists:
+            rec_reasons.extend(a.get("reasons", []))
+            rec_trade_offs.extend(a.get("trade_offs", []))
+            rec_assumptions.extend(a.get("assumptions", []))
+            rec_uncertainties.extend(a.get("uncertainty", []))
+
         recommendations.append({
             "hirer_id": parsed["hirer_id"],
             "source_file": brief_path.name,
             "artist_category": parsed["artist_category"],
             "parsed_requirements": parsed,
-            "ranked_artists": ranked_artists
+            "ranked_artists": top_two_artists,
+            "reasons": rec_reasons,
+            "trade_offs": list(dict.fromkeys(rec_trade_offs)),
+            "assumptions": list(dict.fromkeys(rec_assumptions)),
+            "uncertainty": list(dict.fromkeys(rec_uncertainties)),
+            "improve_your_matches": improve_matches,
+            "refinement_questions": improve_matches["refinement_questions"],
         })
         
     out_data = {
