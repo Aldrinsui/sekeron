@@ -77,7 +77,7 @@ except ImportError:
 # --------------------------------------------------------------------------
 # CONFIG / THRESHOLDS - documented here, nowhere else.
 # --------------------------------------------------------------------------
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
 REQUEST_TIMEOUT_SECONDS = 180
 MAX_MODEL_RETRIES = 2
@@ -359,6 +359,7 @@ def build_prompt_parts(artist_id, category, dimensions, profile_claims, data_qua
 
 RULES (follow exactly):
 1. Assess EVERY dimension listed below. If evidence does not support a dimension, set status="insufficient_evidence", confidence="insufficient", evidence_references=[], and explain why in unknowns_limitations. Do NOT invent a capability.
+1a. You may report up to two additional_observed_capabilities only when a useful capability is directly observable in the supplied evidence and is not adequately represented by the standard dimensions above. These are supplementary observations, not replacements for standard dimensions. Do not infer them from profile claims alone. Use concise, evidence-grounded capability names.
 2. A capability may only be "demonstrated" if you can point to specific evidence_id(s) you were actually shown below, and your observation must describe what is actually visible/audible in that evidence - not what the profile claims, and not the fact that it was "selected" (selection is not proof).
 3. If evidence for a dimension conflicts with itself or is genuinely ambiguous, you may still use status="demonstrated" with confidence="low" and explain the ambiguity - only use "conflicting_evidence" status for the claim_evaluations conflict case below, not for internal evidence ambiguity.
 4. confidence must reflect the AMOUNT and CLARITY of evidence, not your confidence in your own reasoning.
@@ -567,6 +568,12 @@ def main():
     parser.add_argument("--profiles", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--dry-run", action="store_true", help="No network calls; uses a fabricated stub response to test the pipeline.")
+    parser.add_argument(
+    "--artist-id",
+    action="append",
+    dest="artist_ids",
+    help="Process only the specified artist ID(s). May be provided multiple times.",
+    )
     args = parser.parse_args()
 
     dataset_root = args.dataset_root.resolve()
@@ -608,6 +615,8 @@ def main():
     response_schema = build_response_schema(CATEGORY_DIMENSIONS["photographer"])  # placeholder, rebuilt per category below
 
     for ev_artist in evidence_manifest["artists"]:
+        if args.artist_ids and ev_artist["artist_id"] not in args.artist_ids:
+            continue
         artist_id = ev_artist["artist_id"]
         category = ev_artist["category"]
         ds_artist = dataset_artist_by_id.get(artist_id, {})

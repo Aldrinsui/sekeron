@@ -5,21 +5,33 @@
   "update_source": "01_cafe_music_update.txt",
   "artist_category": "musician",
   "change_summary": {
-    "original_requirements_count": 4,
+    "original_requirements_count": 3,
     "updated_requirements_count": 2,
     "ranking_shifts": {
-      "M01": "Unchanged",
-      "M02": "Unchanged"
+      "M04": "Unchanged",
+      "M05": "Unchanged"
     },
     "is_genuine_rerank": false,
-    "notes": "Ranking remained identical. This means artists scored equally relatively under both the old and new criteria."
+    "old_top_two_scores": {
+      "M04": 15.0,
+      "M05": 15.0
+    },
+    "new_top_two_scores": {
+      "M04": 12.0,
+      "M05": 11.0
+    },
+    "old_score_gap": 0.0,
+    "new_score_gap": 1.0,
+    "score_gap_changed": true,
+    "new_tie": false,
+    "notes": "Ranking order remained unchanged, but the score gap changed from 0.00 to 1.00 points."
   },
   "updated_requirements": {
     "hirer_id": "H081",
     "artist_category": "musician",
     "capability_requirements": [
       {
-        "requirement_text": "Deliver a proper 45-minute headline performance set that feels like a featured event/moment rather than background music",
+        "requirement_text": "Perform a 45-minute headline set that feels like a central performance moment",
         "mapped_dimensions": [
           "performance_format",
           "live_vs_studio_context"
@@ -27,28 +39,33 @@
         "importance": "must_have"
       },
       {
-        "requirement_text": "Acoustic performance format",
+        "requirement_text": "Acoustic musical style and performance",
         "mapped_dimensions": [
-          "genre_style_signal",
-          "instrumental_technical_signals"
+          "instrumental_technical_signals",
+          "genre_style_signal"
         ],
         "importance": "must_have"
       }
     ],
     "operational_constraints": [
       {
+        "category": "guest_count",
+        "detail": "Launch night event with around 80 guests",
+        "hard_limit": false
+      },
+      {
         "category": "budget",
         "detail": "Budget up to 15,000",
         "hard_limit": true
       },
       {
-        "category": "guest_count",
-        "detail": "Approximately 80 guests for launch night",
-        "hard_limit": false
+        "category": "location",
+        "detail": "Small cleared area available for performance",
+        "hard_limit": true
       },
       {
         "category": "equipment",
-        "detail": "Small cleared performance area provided; speaker situation currently pending",
+        "detail": "Speaker situation is still pending",
         "hard_limit": false
       }
     ],
@@ -60,141 +77,148 @@
   },
   "ranked_artists": [
     {
-      "artist_id": "M01",
-      "display_name": "Meera Arjun",
-      "total_score": 2.0,
+      "artist_id": "M04",
+      "display_name": "KillRush",
+      "total_score": 12.0,
       "score_breakdown": {
         "performance_format": {
           "status": "demonstrated",
-          "confidence": "low",
+          "confidence": "high",
           "importance": "must_have",
-          "points": 1.0
+          "points": 3.0
         },
         "live_vs_studio_context": {
-          "status": "insufficient_evidence",
-          "confidence": "insufficient",
+          "status": "demonstrated",
+          "confidence": "high",
           "importance": "must_have",
-          "points": 0.0
-        },
-        "genre_style_signal": {
-          "status": "insufficient_evidence",
-          "confidence": "insufficient",
-          "importance": "must_have",
-          "points": 0.0
+          "points": 3.0
         },
         "instrumental_technical_signals": {
           "status": "demonstrated",
-          "confidence": "low",
+          "confidence": "high",
           "importance": "must_have",
-          "points": 1.0
+          "points": 3.0
+        },
+        "genre_style_signal": {
+          "status": "demonstrated",
+          "confidence": "high",
+          "importance": "must_have",
+          "points": 3.0
         }
       },
       "reasons": [
-        "Demonstrated 'performance_format' (low confidence, must_have) directly matches requirement 'Deliver a proper 45-minute headline performance set that feels like a featured event/moment rather than background music'",
-        "Demonstrated 'instrumental_technical_signals' (low confidence, must_have) directly matches requirement 'Acoustic performance format'"
+        "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Performances demonstrate dynamic group setups including acoustic duos (vocal and acoustic guitar), acoustic trios (vocal",
+        "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Recorded evidence captures live rehearsal contexts, indoor practice room settings, and an outdoor balcony recording sess",
+        "Demonstrated 'instrumental_technical_signals' (high confidence, must_have) directly matches requirement 'Acoustic musical style and performance': Video frames show acoustic guitar fretting hand positions and strumming motion, finger placement on a side-blown bamboo ",
+        "Demonstrated 'genre_style_signal' (high confidence, must_have) directly matches requirement 'Acoustic musical style and performance': Audible performances showcase Hindi pop/rock and acoustic Bollywood covers featuring rhythmic guitar strumming, Indian c"
       ],
       "trade_offs": [
-        "No demonstrated portfolio evidence for 'live_vs_studio_context' (must_have) matching requirement 'Deliver a proper 45-minute headline performance set that feels like a featured event/moment rather than background music'",
-        "No demonstrated portfolio evidence for 'genre_style_signal' (must_have) matching requirement 'Acoustic performance format'"
+        "No critical capability gaps identified from available evidence."
       ],
       "assumptions": [
+        "Assumes artist can accommodate operational requirement: guest_count (Launch night event with around 80 guests)",
         "Assumes artist standard fee can align with requested budget: Budget up to 15,000 [HARD LIMIT]",
-        "Assumes artist can accommodate operational requirement: guest_count (Approximately 80 guests for launch night)",
-        "Assumes artist can accommodate operational requirement: equipment (Small cleared performance area provided; speaker situation currently pending)"
+        "Assumes artist availability and scheduling fit for Small cleared area available for performance [HARD LIMIT]",
+        "Assumes artist can accommodate operational requirement: equipment (Speaker situation is still pending)"
       ],
       "uncertainty": [
-        "Capability 'live_vs_studio_context' is unverified in portfolio (status: insufficient_evidence)",
-        "Capability 'genre_style_signal' is unverified in portfolio (status: insufficient_evidence)",
+        "Operational constraint 'guest_count' (Launch night event with around 80 guests) requires manual verification with artist",
         "Operational constraint 'budget' (Budget up to 15,000) requires manual verification with artist",
-        "Operational constraint 'guest_count' (Approximately 80 guests for launch night) requires manual verification with artist",
-        "Operational constraint 'equipment' (Small cleared performance area provided; speaker situation currently pending) requires manual verification with artist"
+        "Operational constraint 'location' (Small cleared area available for performance) requires manual verification with artist",
+        "Operational constraint 'equipment' (Speaker situation is still pending) requires manual verification with artist"
       ],
       "operational_constraint_notes": [
+        "guest_count: Launch night event with around 80 guests — verify with artist",
         "budget: Budget up to 15,000 [HARD LIMIT] — verify with artist",
-        "guest_count: Approximately 80 guests for launch night — verify with artist",
-        "equipment: Small cleared performance area provided; speaker situation currently pending — verify with artist"
+        "location: Small cleared area available for performance [HARD LIMIT] — verify with artist",
+        "equipment: Speaker situation is still pending — verify with artist"
       ],
       "rank": 1
     },
     {
-      "artist_id": "M02",
-      "display_name": "Neon Junction",
-      "total_score": 2.0,
+      "artist_id": "M05",
+      "display_name": "Lunar Noise",
+      "total_score": 11.0,
       "score_breakdown": {
         "performance_format": {
           "status": "demonstrated",
-          "confidence": "low",
+          "confidence": "high",
           "importance": "must_have",
-          "points": 1.0
+          "points": 3.0
         },
         "live_vs_studio_context": {
-          "status": "insufficient_evidence",
-          "confidence": "insufficient",
+          "status": "demonstrated",
+          "confidence": "high",
           "importance": "must_have",
-          "points": 0.0
-        },
-        "genre_style_signal": {
-          "status": "insufficient_evidence",
-          "confidence": "insufficient",
-          "importance": "must_have",
-          "points": 0.0
+          "points": 3.0
         },
         "instrumental_technical_signals": {
           "status": "demonstrated",
-          "confidence": "low",
+          "confidence": "medium",
           "importance": "must_have",
-          "points": 1.0
+          "points": 2.0
+        },
+        "genre_style_signal": {
+          "status": "demonstrated",
+          "confidence": "high",
+          "importance": "must_have",
+          "points": 3.0
         }
       },
       "reasons": [
-        "Demonstrated 'performance_format' (low confidence, must_have) directly matches requirement 'Deliver a proper 45-minute headline performance set that feels like a featured event/moment rather than background music'",
-        "Demonstrated 'instrumental_technical_signals' (low confidence, must_have) directly matches requirement 'Acoustic performance format'"
+        "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Solo performance format featuring a single lead vocalist accompanying himself on acoustic guitar.",
+        "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Recorded in casual indoor home/room settings with natural room acoustics and residential background visual elements rath",
+        "Demonstrated 'instrumental_technical_signals' (medium confidence, must_have) directly matches requirement 'Acoustic musical style and performance': Visible capo attached to the neck of an acoustic guitar and hand position on the fretboard in silhouette.",
+        "Demonstrated 'genre_style_signal' (high confidence, must_have) directly matches requirement 'Acoustic musical style and performance': Audible style signals of Hindi acoustic pop and acoustic ballad cover renditions featuring vocal ornamentation and acous"
       ],
       "trade_offs": [
-        "No demonstrated portfolio evidence for 'live_vs_studio_context' (must_have) matching requirement 'Deliver a proper 45-minute headline performance set that feels like a featured event/moment rather than background music'",
-        "No demonstrated portfolio evidence for 'genre_style_signal' (must_have) matching requirement 'Acoustic performance format'"
+        "No critical capability gaps identified from available evidence."
       ],
       "assumptions": [
+        "Assumes artist can accommodate operational requirement: guest_count (Launch night event with around 80 guests)",
         "Assumes artist standard fee can align with requested budget: Budget up to 15,000 [HARD LIMIT]",
-        "Assumes artist can accommodate operational requirement: guest_count (Approximately 80 guests for launch night)",
-        "Assumes artist can accommodate operational requirement: equipment (Small cleared performance area provided; speaker situation currently pending)"
+        "Assumes artist availability and scheduling fit for Small cleared area available for performance [HARD LIMIT]",
+        "Assumes artist can accommodate operational requirement: equipment (Speaker situation is still pending)"
       ],
       "uncertainty": [
-        "Capability 'live_vs_studio_context' is unverified in portfolio (status: insufficient_evidence)",
-        "Capability 'genre_style_signal' is unverified in portfolio (status: insufficient_evidence)",
+        "Operational constraint 'guest_count' (Launch night event with around 80 guests) requires manual verification with artist",
         "Operational constraint 'budget' (Budget up to 15,000) requires manual verification with artist",
-        "Operational constraint 'guest_count' (Approximately 80 guests for launch night) requires manual verification with artist",
-        "Operational constraint 'equipment' (Small cleared performance area provided; speaker situation currently pending) requires manual verification with artist"
+        "Operational constraint 'location' (Small cleared area available for performance) requires manual verification with artist",
+        "Operational constraint 'equipment' (Speaker situation is still pending) requires manual verification with artist"
       ],
       "operational_constraint_notes": [
+        "guest_count: Launch night event with around 80 guests — verify with artist",
         "budget: Budget up to 15,000 [HARD LIMIT] — verify with artist",
-        "guest_count: Approximately 80 guests for launch night — verify with artist",
-        "equipment: Small cleared performance area provided; speaker situation currently pending — verify with artist"
+        "location: Small cleared area available for performance [HARD LIMIT] — verify with artist",
+        "equipment: Speaker situation is still pending — verify with artist"
       ],
       "rank": 2
     }
   ],
   "reasons": [
-    "Demonstrated 'performance_format' (low confidence, must_have) directly matches requirement 'Deliver a proper 45-minute headline performance set that feels like a featured event/moment rather than background music'",
-    "Demonstrated 'instrumental_technical_signals' (low confidence, must_have) directly matches requirement 'Acoustic performance format'",
-    "Demonstrated 'performance_format' (low confidence, must_have) directly matches requirement 'Deliver a proper 45-minute headline performance set that feels like a featured event/moment rather than background music'",
-    "Demonstrated 'instrumental_technical_signals' (low confidence, must_have) directly matches requirement 'Acoustic performance format'"
+    "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Performances demonstrate dynamic group setups including acoustic duos (vocal and acoustic guitar), acoustic trios (vocal",
+    "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Recorded evidence captures live rehearsal contexts, indoor practice room settings, and an outdoor balcony recording sess",
+    "Demonstrated 'instrumental_technical_signals' (high confidence, must_have) directly matches requirement 'Acoustic musical style and performance': Video frames show acoustic guitar fretting hand positions and strumming motion, finger placement on a side-blown bamboo ",
+    "Demonstrated 'genre_style_signal' (high confidence, must_have) directly matches requirement 'Acoustic musical style and performance': Audible performances showcase Hindi pop/rock and acoustic Bollywood covers featuring rhythmic guitar strumming, Indian c",
+    "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Solo performance format featuring a single lead vocalist accompanying himself on acoustic guitar.",
+    "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Recorded in casual indoor home/room settings with natural room acoustics and residential background visual elements rath",
+    "Demonstrated 'instrumental_technical_signals' (medium confidence, must_have) directly matches requirement 'Acoustic musical style and performance': Visible capo attached to the neck of an acoustic guitar and hand position on the fretboard in silhouette.",
+    "Demonstrated 'genre_style_signal' (high confidence, must_have) directly matches requirement 'Acoustic musical style and performance': Audible style signals of Hindi acoustic pop and acoustic ballad cover renditions featuring vocal ornamentation and acous"
   ],
   "trade_offs": [
-    "No demonstrated portfolio evidence for 'live_vs_studio_context' (must_have) matching requirement 'Deliver a proper 45-minute headline performance set that feels like a featured event/moment rather than background music'",
-    "No demonstrated portfolio evidence for 'genre_style_signal' (must_have) matching requirement 'Acoustic performance format'"
+    "No critical capability gaps identified from available evidence."
   ],
   "assumptions": [
+    "Assumes artist can accommodate operational requirement: guest_count (Launch night event with around 80 guests)",
     "Assumes artist standard fee can align with requested budget: Budget up to 15,000 [HARD LIMIT]",
-    "Assumes artist can accommodate operational requirement: guest_count (Approximately 80 guests for launch night)",
-    "Assumes artist can accommodate operational requirement: equipment (Small cleared performance area provided; speaker situation currently pending)"
+    "Assumes artist availability and scheduling fit for Small cleared area available for performance [HARD LIMIT]",
+    "Assumes artist can accommodate operational requirement: equipment (Speaker situation is still pending)"
   ],
   "uncertainty": [
-    "Capability 'live_vs_studio_context' is unverified in portfolio (status: insufficient_evidence)",
-    "Capability 'genre_style_signal' is unverified in portfolio (status: insufficient_evidence)",
+    "Operational constraint 'guest_count' (Launch night event with around 80 guests) requires manual verification with artist",
     "Operational constraint 'budget' (Budget up to 15,000) requires manual verification with artist",
-    "Operational constraint 'guest_count' (Approximately 80 guests for launch night) requires manual verification with artist",
-    "Operational constraint 'equipment' (Small cleared performance area provided; speaker situation currently pending) requires manual verification with artist"
+    "Operational constraint 'location' (Small cleared area available for performance) requires manual verification with artist",
+    "Operational constraint 'equipment' (Speaker situation is still pending) requires manual verification with artist"
   ],
   "improve_your_matches": {
     "section_title": "Improve your matches",

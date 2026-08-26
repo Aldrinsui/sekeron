@@ -6,7 +6,7 @@
 
 Gemini was used to generate the evidence-backed artist intelligence and parse the supplied hirer briefs into structured requirements.
 
-The artist intelligence run produced 15 artist records and passed validation. Hirer parsing produced structured capability requirements, operational constraints, mapped capability dimensions and parsing metadata.
+The final artist-intelligence run produced 15 artist records using Gemini 3.6 Flash. The final combined output passed the project's validation checks. Hirer parsing produced structured capability requirements, operational constraints, mapped capability dimensions and parsing metadata.
 
 ### AI coding assistant
 
@@ -19,7 +19,7 @@ It assisted with parser, scoring, orchestration and follow-up update implementat
 I remained responsible for the submitted implementation and verified:
 
 - repository structure and Git history
-- Python syntax using py_compile
+- Python syntax using `py_compile`
 - the recommendation test suite
 - confidence and importance weighting
 - insufficient-evidence handling
@@ -30,14 +30,15 @@ I remained responsible for the submitted implementation and verified:
 - refinement-question limits
 - follow-up requirement replacement and rescoring
 - generated output structure
+- evidence references and generation metadata
 
 The final generated JSON outputs were produced by code and were not manually repaired.
 
 ## API limitation
 
-The real Gemini-generated artist intelligence and parsed hirer requirements were successfully produced.
+During development, a Gemini API quota/rate-limit error occurred after the free-tier request quota for one project/model was exhausted. This prevented two artist records and a follow-up parsing request from completing on that configuration.
 
-During one final regeneration attempt, an API quota/rate-limit error occurred because the configured API key belonged to a different project. After switching to the Sekeron project key, the real recommendation and follow-up pipelines completed successfully.
+A separate authorized Gemini API project with available quota was then used for the remaining required generation. The final artist-intelligence output contains 15 successful Gemini-generated records, and the final recommendation and follow-up pipelines completed successfully.
 
 No credentials are included in the repository.
 

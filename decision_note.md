@@ -18,9 +18,9 @@ The system supports an initial, evidence-led decision about which artists are pl
 
 **Musicians:** genre/style signal, performance format, live-vs-studio context, vocal/instrumental role, audio arrangement characteristics, instrumental/technical signals.
 
-**Photographers:** subject/domain, composition/framing, lighting treatment, color/tone treatment, visual sequencing and related photographic technical signals.
+**Photographers:** subject/domain, composition/framing, lighting treatment, color/tone treatment, environment context, technical control indicators, shooting context/style.
 
-**Video editors:** subject/domain, visual sequencing, shot composition/framing, color/tone treatment, audio/dialogue handling, technical control indicators.
+**Video editors:** pacing/rhythm, shot composition/framing, visual sequencing, color treatment, content/format context, motion graphics/overlay evidence, audio/dialogue handling.
 
 The vocabulary is centralized in `scripts/capability_vocabulary.py`.
 
@@ -35,3 +35,4 @@ No frontend, web scraping, model training, deployment, identity inference or tru
 - Operational constraints such as budget, date and equipment are surfaced for human verification but are not algorithmically scored.
 - Hirer briefs can contain ambiguity or unknowns; recommendations are therefore provisional.
 - Gemini is used for structured brief parsing and artist intelligence; ranking remains deterministic and reproducible.
+- Additional observed capabilities may be recorded when directly supported by supplied media, but they remain supplementary to the standard category dimensions.

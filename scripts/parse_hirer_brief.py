@@ -45,6 +45,8 @@ GEMINI_API_URL = (
     f"{GEMINI_MODEL}:generateContent"
 )
 REQUEST_TIMEOUT_SECONDS = 120
+MAX_API_RETRIES = 3
+API_RETRY_BACKOFF_SECONDS = 20
 
 
 # --------------------------------------------------------------------------
@@ -161,9 +163,8 @@ Return ONLY the JSON matching the provided schema."""
 # --------------------------------------------------------------------------
 # Gemini API call
 # --------------------------------------------------------------------------
-
 def call_gemini_parse(brief_text, source_file, api_key):
-    """Call Gemini to parse a brief. Returns parsed dict."""
+    """Call Gemini to parse a brief, retrying transient rate-limit failures."""
     prompt = build_parse_prompt(brief_text, source_file)
     schema = build_parse_schema()
     body = {
@@ -174,16 +175,36 @@ def call_gemini_parse(brief_text, source_file, api_key):
             "responseSchema": schema,
         },
     }
-    headers = {"Content-Type": "application/json", "x-goog-api-key": api_key}
-    resp = requests.post(
-        GEMINI_API_URL, headers=headers, json=body,
-        timeout=REQUEST_TIMEOUT_SECONDS,
-    )
-    resp.raise_for_status()
-    data = resp.json()
-    text = data["candidates"][0]["content"]["parts"][0]["text"]
-    return json.loads(text)
+    headers = {
+        "Content-Type": "application/json",
+        "x-goog-api-key": api_key,
+    }
 
+    for attempt in range(MAX_API_RETRIES + 1):
+        resp = requests.post(
+            GEMINI_API_URL,
+            headers=headers,
+            json=body,
+            timeout=REQUEST_TIMEOUT_SECONDS,
+        )
+
+        if resp.status_code == 429 and attempt < MAX_API_RETRIES:
+            wait_seconds = API_RETRY_BACKOFF_SECONDS * (2 ** attempt)
+            print(
+                f"Gemini rate limit (429); retrying in "
+                f"{wait_seconds}s ({attempt + 1}/{MAX_API_RETRIES})...",
+                file=sys.stderr,
+            )
+            import time
+            time.sleep(wait_seconds)
+            continue
+
+        resp.raise_for_status()
+        data = resp.json()
+        text = data["candidates"][0]["content"]["parts"][0]["text"]
+        return json.loads(text)
+
+    raise RuntimeError("Gemini request failed after retry attempts.")
 
 # --------------------------------------------------------------------------
 # Dry-run stub parser — deterministic, no API calls

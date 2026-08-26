@@ -10,31 +10,23 @@
         "artist_category": "musician",
         "capability_requirements": [
           {
-            "requirement_text": "Live background music performance appropriate for a café environment where patrons can comfortably converse",
+            "requirement_text": "Acoustic background live music soft enough for café conversation",
             "mapped_dimensions": [
+              "performance_format",
               "live_vs_studio_context",
               "audio_arrangement_characteristics"
             ],
             "importance": "must_have"
           },
           {
-            "requirement_text": "Ability to perform in an acoustic format",
+            "requirement_text": "Bilingual repertoire covering Hindi and English songs",
             "mapped_dimensions": [
-              "performance_format",
-              "instrumental_technical_signals"
-            ],
-            "importance": "nice_to_have"
-          },
-          {
-            "requirement_text": "Repertoire covering Hindi and/or English songs",
-            "mapped_dimensions": [
-              "genre_style_signal",
-              "vocal_or_instrumental_role"
+              "genre_style_signal"
             ],
             "importance": "must_have"
           },
           {
-            "requirement_text": "Capability to deliver a slightly lively performance section later in the evening",
+            "requirement_text": "Ability to deliver a slightly more lively set towards the end of the session",
             "mapped_dimensions": [
               "performance_format",
               "audio_arrangement_characteristics"
@@ -45,23 +37,23 @@
         "operational_constraints": [
           {
             "category": "date_availability",
-            "detail": "Next Friday evening, from 7:00 PM to 10:00 PM",
+            "detail": "Next Friday from 7:00 PM to 10:00 PM",
             "hard_limit": true
           },
           {
             "category": "budget",
-            "detail": "Target budget around 7,000 INR with an absolute maximum limit of 9,000 INR",
+            "detail": "Target around 7,000 INR with an absolute maximum of 9,000 INR",
             "hard_limit": true
           },
           {
             "category": "location",
-            "detail": "Café venue with no dedicated stage area, requiring a small act/setup footprint",
+            "detail": "Café setting with no formal stage",
             "hard_limit": true
           },
           {
             "category": "equipment",
-            "detail": "Café has some sound equipment but usability for live musical performance is unconfirmed",
-            "hard_limit": false
+            "detail": "Compact setup preferred (no massive band setup); venue PA/speakers setup is unconfirmed",
+            "hard_limit": true
           }
         ],
         "source_file": "01_cafe_music_whatsapp.txt",
@@ -72,192 +64,156 @@
       },
       "ranked_artists": [
         {
-          "artist_id": "M01",
-          "display_name": "Meera Arjun",
-          "total_score": 2.5,
+          "artist_id": "M04",
+          "display_name": "KillRush",
+          "total_score": 15.0,
           "score_breakdown": {
-            "live_vs_studio_context": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
-              "importance": "must_have",
-              "points": 0.0
-            },
-            "audio_arrangement_characteristics": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
-              "importance": "nice_to_have",
-              "points": 0.0
-            },
             "performance_format": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "high",
               "importance": "nice_to_have",
-              "points": 0.5
+              "points": 1.5
             },
-            "instrumental_technical_signals": {
+            "live_vs_studio_context": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
+            },
+            "audio_arrangement_characteristics": {
+              "status": "demonstrated",
+              "confidence": "high",
               "importance": "nice_to_have",
-              "points": 0.5
+              "points": 1.5
             },
             "genre_style_signal": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
-              "importance": "must_have",
-              "points": 0.0
-            },
-            "vocal_or_instrumental_role": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "high",
               "importance": "must_have",
-              "points": 1.0
+              "points": 3.0
             }
           },
           "reasons": [
-            "Demonstrated 'performance_format' (low confidence, nice_to_have) directly matches requirement 'Ability to perform in an acoustic format'",
-            "Demonstrated 'instrumental_technical_signals' (low confidence, nice_to_have) directly matches requirement 'Ability to perform in an acoustic format'",
-            "Demonstrated 'vocal_or_instrumental_role' (low confidence, must_have) directly matches requirement 'Repertoire covering Hindi and/or English songs'",
-            "Demonstrated 'performance_format' (low confidence, nice_to_have) directly matches requirement 'Capability to deliver a slightly lively performance section later in the evening'"
+            "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Performances demonstrate dynamic group setups including acoustic duos (vocal and acoustic guitar), acoustic trios (vocal",
+            "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Recorded evidence captures live rehearsal contexts, indoor practice room settings, and an outdoor balcony recording sess",
+            "Demonstrated 'audio_arrangement_characteristics' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Arrangements feature acoustic guitar strumming and arpeggiated fingerpicking as primary harmonic backing, complemented b",
+            "Demonstrated 'genre_style_signal' (high confidence, must_have) directly matches requirement 'Bilingual repertoire covering Hindi and English songs': Audible performances showcase Hindi pop/rock and acoustic Bollywood covers featuring rhythmic guitar strumming, Indian c",
+            "Demonstrated 'performance_format' (high confidence, nice_to_have) directly matches requirement 'Ability to deliver a slightly more lively set towards the end of the session': Performances demonstrate dynamic group setups including acoustic duos (vocal and acoustic guitar), acoustic trios (vocal",
+            "Demonstrated 'audio_arrangement_characteristics' (high confidence, nice_to_have) directly matches requirement 'Ability to deliver a slightly more lively set towards the end of the session': Arrangements feature acoustic guitar strumming and arpeggiated fingerpicking as primary harmonic backing, complemented b"
           ],
           "trade_offs": [
-            "No demonstrated portfolio evidence for 'live_vs_studio_context' (must_have) matching requirement 'Live background music performance appropriate for a café environment where patrons can comfortably converse'",
-            "No demonstrated portfolio evidence for 'audio_arrangement_characteristics' (must_have) matching requirement 'Live background music performance appropriate for a café environment where patrons can comfortably converse'",
-            "No demonstrated portfolio evidence for 'genre_style_signal' (must_have) matching requirement 'Repertoire covering Hindi and/or English songs'",
-            "No demonstrated portfolio evidence for 'audio_arrangement_characteristics' (nice_to_have) matching requirement 'Capability to deliver a slightly lively performance section later in the evening'"
+            "No critical capability gaps identified from available evidence."
           ],
           "assumptions": [
-            "Assumes artist availability and scheduling fit for Next Friday evening, from 7:00 PM to 10:00 PM [HARD LIMIT]",
-            "Assumes artist standard fee can align with requested budget: Target budget around 7,000 INR with an absolute maximum limit of 9,000 INR [HARD LIMIT]",
-            "Assumes artist availability and scheduling fit for Café venue with no dedicated stage area, requiring a small act/setup footprint [HARD LIMIT]",
-            "Assumes artist can accommodate operational requirement: equipment (Café has some sound equipment but usability for live musical performance is unconfirmed)"
+            "Assumes artist availability and scheduling fit for Next Friday from 7:00 PM to 10:00 PM [HARD LIMIT]",
+            "Assumes artist standard fee can align with requested budget: Target around 7,000 INR with an absolute maximum of 9,000 INR [HARD LIMIT]",
+            "Assumes artist availability and scheduling fit for Café setting with no formal stage [HARD LIMIT]",
+            "Assumes artist can accommodate operational requirement: equipment (Compact setup preferred (no massive band setup); venue PA/speakers setup is unconfirmed) [HARD LIMIT]"
           ],
           "uncertainty": [
-            "Capability 'live_vs_studio_context' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'audio_arrangement_characteristics' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'genre_style_signal' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'audio_arrangement_characteristics' is unverified in portfolio (status: insufficient_evidence)",
-            "Operational constraint 'date_availability' (Next Friday evening, from 7:00 PM to 10:00 PM) requires manual verification with artist",
-            "Operational constraint 'budget' (Target budget around 7,000 INR with an absolute maximum limit of 9,000 INR) requires manual verification with artist",
-            "Operational constraint 'location' (Café venue with no dedicated stage area, requiring a small act/setup footprint) requires manual verification with artist",
-            "Operational constraint 'equipment' (Café has some sound equipment but usability for live musical performance is unconfirmed) requires manual verification with artist"
+            "Operational constraint 'date_availability' (Next Friday from 7:00 PM to 10:00 PM) requires manual verification with artist",
+            "Operational constraint 'budget' (Target around 7,000 INR with an absolute maximum of 9,000 INR) requires manual verification with artist",
+            "Operational constraint 'location' (Café setting with no formal stage) requires manual verification with artist",
+            "Operational constraint 'equipment' (Compact setup preferred (no massive band setup); venue PA/speakers setup is unconfirmed) requires manual verification with artist"
           ],
           "operational_constraint_notes": [
-            "date_availability: Next Friday evening, from 7:00 PM to 10:00 PM [HARD LIMIT] — verify with artist",
-            "budget: Target budget around 7,000 INR with an absolute maximum limit of 9,000 INR [HARD LIMIT] — verify with artist",
-            "location: Café venue with no dedicated stage area, requiring a small act/setup footprint [HARD LIMIT] — verify with artist",
-            "equipment: Café has some sound equipment but usability for live musical performance is unconfirmed — verify with artist"
+            "date_availability: Next Friday from 7:00 PM to 10:00 PM [HARD LIMIT] — verify with artist",
+            "budget: Target around 7,000 INR with an absolute maximum of 9,000 INR [HARD LIMIT] — verify with artist",
+            "location: Café setting with no formal stage [HARD LIMIT] — verify with artist",
+            "equipment: Compact setup preferred (no massive band setup); venue PA/speakers setup is unconfirmed [HARD LIMIT] — verify with artist"
           ],
           "rank": 1
         },
         {
-          "artist_id": "M02",
-          "display_name": "Neon Junction",
-          "total_score": 2.5,
+          "artist_id": "M05",
+          "display_name": "Lunar Noise",
+          "total_score": 15.0,
           "score_breakdown": {
-            "live_vs_studio_context": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
-              "importance": "must_have",
-              "points": 0.0
-            },
-            "audio_arrangement_characteristics": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
-              "importance": "nice_to_have",
-              "points": 0.0
-            },
             "performance_format": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "high",
               "importance": "nice_to_have",
-              "points": 0.5
+              "points": 1.5
             },
-            "instrumental_technical_signals": {
+            "live_vs_studio_context": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
+            },
+            "audio_arrangement_characteristics": {
+              "status": "demonstrated",
+              "confidence": "high",
               "importance": "nice_to_have",
-              "points": 0.5
+              "points": 1.5
             },
             "genre_style_signal": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
-              "importance": "must_have",
-              "points": 0.0
-            },
-            "vocal_or_instrumental_role": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "high",
               "importance": "must_have",
-              "points": 1.0
+              "points": 3.0
             }
           },
           "reasons": [
-            "Demonstrated 'performance_format' (low confidence, nice_to_have) directly matches requirement 'Ability to perform in an acoustic format'",
-            "Demonstrated 'instrumental_technical_signals' (low confidence, nice_to_have) directly matches requirement 'Ability to perform in an acoustic format'",
-            "Demonstrated 'vocal_or_instrumental_role' (low confidence, must_have) directly matches requirement 'Repertoire covering Hindi and/or English songs'",
-            "Demonstrated 'performance_format' (low confidence, nice_to_have) directly matches requirement 'Capability to deliver a slightly lively performance section later in the evening'"
+            "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Solo performance format featuring a single lead vocalist accompanying himself on acoustic guitar.",
+            "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Recorded in casual indoor home/room settings with natural room acoustics and residential background visual elements rath",
+            "Demonstrated 'audio_arrangement_characteristics' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Minimalist audio arrangement consisting of strummed acoustic guitar chords providing rhythmic and harmonic structure ben",
+            "Demonstrated 'genre_style_signal' (high confidence, must_have) directly matches requirement 'Bilingual repertoire covering Hindi and English songs': Audible style signals of Hindi acoustic pop and acoustic ballad cover renditions featuring vocal ornamentation and acous",
+            "Demonstrated 'performance_format' (high confidence, nice_to_have) directly matches requirement 'Ability to deliver a slightly more lively set towards the end of the session': Solo performance format featuring a single lead vocalist accompanying himself on acoustic guitar.",
+            "Demonstrated 'audio_arrangement_characteristics' (high confidence, nice_to_have) directly matches requirement 'Ability to deliver a slightly more lively set towards the end of the session': Minimalist audio arrangement consisting of strummed acoustic guitar chords providing rhythmic and harmonic structure ben"
           ],
           "trade_offs": [
-            "No demonstrated portfolio evidence for 'live_vs_studio_context' (must_have) matching requirement 'Live background music performance appropriate for a café environment where patrons can comfortably converse'",
-            "No demonstrated portfolio evidence for 'audio_arrangement_characteristics' (must_have) matching requirement 'Live background music performance appropriate for a café environment where patrons can comfortably converse'",
-            "No demonstrated portfolio evidence for 'genre_style_signal' (must_have) matching requirement 'Repertoire covering Hindi and/or English songs'",
-            "No demonstrated portfolio evidence for 'audio_arrangement_characteristics' (nice_to_have) matching requirement 'Capability to deliver a slightly lively performance section later in the evening'"
+            "No critical capability gaps identified from available evidence."
           ],
           "assumptions": [
-            "Assumes artist availability and scheduling fit for Next Friday evening, from 7:00 PM to 10:00 PM [HARD LIMIT]",
-            "Assumes artist standard fee can align with requested budget: Target budget around 7,000 INR with an absolute maximum limit of 9,000 INR [HARD LIMIT]",
-            "Assumes artist availability and scheduling fit for Café venue with no dedicated stage area, requiring a small act/setup footprint [HARD LIMIT]",
-            "Assumes artist can accommodate operational requirement: equipment (Café has some sound equipment but usability for live musical performance is unconfirmed)"
+            "Assumes artist availability and scheduling fit for Next Friday from 7:00 PM to 10:00 PM [HARD LIMIT]",
+            "Assumes artist standard fee can align with requested budget: Target around 7,000 INR with an absolute maximum of 9,000 INR [HARD LIMIT]",
+            "Assumes artist availability and scheduling fit for Café setting with no formal stage [HARD LIMIT]",
+            "Assumes artist can accommodate operational requirement: equipment (Compact setup preferred (no massive band setup); venue PA/speakers setup is unconfirmed) [HARD LIMIT]"
           ],
           "uncertainty": [
-            "Capability 'live_vs_studio_context' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'audio_arrangement_characteristics' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'genre_style_signal' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'audio_arrangement_characteristics' is unverified in portfolio (status: insufficient_evidence)",
-            "Operational constraint 'date_availability' (Next Friday evening, from 7:00 PM to 10:00 PM) requires manual verification with artist",
-            "Operational constraint 'budget' (Target budget around 7,000 INR with an absolute maximum limit of 9,000 INR) requires manual verification with artist",
-            "Operational constraint 'location' (Café venue with no dedicated stage area, requiring a small act/setup footprint) requires manual verification with artist",
-            "Operational constraint 'equipment' (Café has some sound equipment but usability for live musical performance is unconfirmed) requires manual verification with artist"
+            "Operational constraint 'date_availability' (Next Friday from 7:00 PM to 10:00 PM) requires manual verification with artist",
+            "Operational constraint 'budget' (Target around 7,000 INR with an absolute maximum of 9,000 INR) requires manual verification with artist",
+            "Operational constraint 'location' (Café setting with no formal stage) requires manual verification with artist",
+            "Operational constraint 'equipment' (Compact setup preferred (no massive band setup); venue PA/speakers setup is unconfirmed) requires manual verification with artist"
           ],
           "operational_constraint_notes": [
-            "date_availability: Next Friday evening, from 7:00 PM to 10:00 PM [HARD LIMIT] — verify with artist",
-            "budget: Target budget around 7,000 INR with an absolute maximum limit of 9,000 INR [HARD LIMIT] — verify with artist",
-            "location: Café venue with no dedicated stage area, requiring a small act/setup footprint [HARD LIMIT] — verify with artist",
-            "equipment: Café has some sound equipment but usability for live musical performance is unconfirmed — verify with artist"
+            "date_availability: Next Friday from 7:00 PM to 10:00 PM [HARD LIMIT] — verify with artist",
+            "budget: Target around 7,000 INR with an absolute maximum of 9,000 INR [HARD LIMIT] — verify with artist",
+            "location: Café setting with no formal stage [HARD LIMIT] — verify with artist",
+            "equipment: Compact setup preferred (no massive band setup); venue PA/speakers setup is unconfirmed [HARD LIMIT] — verify with artist"
           ],
           "rank": 2
         }
       ],
       "reasons": [
-        "Demonstrated 'performance_format' (low confidence, nice_to_have) directly matches requirement 'Ability to perform in an acoustic format'",
-        "Demonstrated 'instrumental_technical_signals' (low confidence, nice_to_have) directly matches requirement 'Ability to perform in an acoustic format'",
-        "Demonstrated 'vocal_or_instrumental_role' (low confidence, must_have) directly matches requirement 'Repertoire covering Hindi and/or English songs'",
-        "Demonstrated 'performance_format' (low confidence, nice_to_have) directly matches requirement 'Capability to deliver a slightly lively performance section later in the evening'",
-        "Demonstrated 'performance_format' (low confidence, nice_to_have) directly matches requirement 'Ability to perform in an acoustic format'",
-        "Demonstrated 'instrumental_technical_signals' (low confidence, nice_to_have) directly matches requirement 'Ability to perform in an acoustic format'",
-        "Demonstrated 'vocal_or_instrumental_role' (low confidence, must_have) directly matches requirement 'Repertoire covering Hindi and/or English songs'",
-        "Demonstrated 'performance_format' (low confidence, nice_to_have) directly matches requirement 'Capability to deliver a slightly lively performance section later in the evening'"
+        "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Performances demonstrate dynamic group setups including acoustic duos (vocal and acoustic guitar), acoustic trios (vocal",
+        "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Recorded evidence captures live rehearsal contexts, indoor practice room settings, and an outdoor balcony recording sess",
+        "Demonstrated 'audio_arrangement_characteristics' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Arrangements feature acoustic guitar strumming and arpeggiated fingerpicking as primary harmonic backing, complemented b",
+        "Demonstrated 'genre_style_signal' (high confidence, must_have) directly matches requirement 'Bilingual repertoire covering Hindi and English songs': Audible performances showcase Hindi pop/rock and acoustic Bollywood covers featuring rhythmic guitar strumming, Indian c",
+        "Demonstrated 'performance_format' (high confidence, nice_to_have) directly matches requirement 'Ability to deliver a slightly more lively set towards the end of the session': Performances demonstrate dynamic group setups including acoustic duos (vocal and acoustic guitar), acoustic trios (vocal",
+        "Demonstrated 'audio_arrangement_characteristics' (high confidence, nice_to_have) directly matches requirement 'Ability to deliver a slightly more lively set towards the end of the session': Arrangements feature acoustic guitar strumming and arpeggiated fingerpicking as primary harmonic backing, complemented b",
+        "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Solo performance format featuring a single lead vocalist accompanying himself on acoustic guitar.",
+        "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Recorded in casual indoor home/room settings with natural room acoustics and residential background visual elements rath",
+        "Demonstrated 'audio_arrangement_characteristics' (high confidence, must_have) directly matches requirement 'Acoustic background live music soft enough for café conversation': Minimalist audio arrangement consisting of strummed acoustic guitar chords providing rhythmic and harmonic structure ben",
+        "Demonstrated 'genre_style_signal' (high confidence, must_have) directly matches requirement 'Bilingual repertoire covering Hindi and English songs': Audible style signals of Hindi acoustic pop and acoustic ballad cover renditions featuring vocal ornamentation and acous",
+        "Demonstrated 'performance_format' (high confidence, nice_to_have) directly matches requirement 'Ability to deliver a slightly more lively set towards the end of the session': Solo performance format featuring a single lead vocalist accompanying himself on acoustic guitar.",
+        "Demonstrated 'audio_arrangement_characteristics' (high confidence, nice_to_have) directly matches requirement 'Ability to deliver a slightly more lively set towards the end of the session': Minimalist audio arrangement consisting of strummed acoustic guitar chords providing rhythmic and harmonic structure ben"
       ],
       "trade_offs": [
-        "No demonstrated portfolio evidence for 'live_vs_studio_context' (must_have) matching requirement 'Live background music performance appropriate for a café environment where patrons can comfortably converse'",
-        "No demonstrated portfolio evidence for 'audio_arrangement_characteristics' (must_have) matching requirement 'Live background music performance appropriate for a café environment where patrons can comfortably converse'",
-        "No demonstrated portfolio evidence for 'genre_style_signal' (must_have) matching requirement 'Repertoire covering Hindi and/or English songs'",
-        "No demonstrated portfolio evidence for 'audio_arrangement_characteristics' (nice_to_have) matching requirement 'Capability to deliver a slightly lively performance section later in the evening'"
+        "No critical capability gaps identified from available evidence."
       ],
       "assumptions": [
-        "Assumes artist availability and scheduling fit for Next Friday evening, from 7:00 PM to 10:00 PM [HARD LIMIT]",
-        "Assumes artist standard fee can align with requested budget: Target budget around 7,000 INR with an absolute maximum limit of 9,000 INR [HARD LIMIT]",
-        "Assumes artist availability and scheduling fit for Café venue with no dedicated stage area, requiring a small act/setup footprint [HARD LIMIT]",
-        "Assumes artist can accommodate operational requirement: equipment (Café has some sound equipment but usability for live musical performance is unconfirmed)"
+        "Assumes artist availability and scheduling fit for Next Friday from 7:00 PM to 10:00 PM [HARD LIMIT]",
+        "Assumes artist standard fee can align with requested budget: Target around 7,000 INR with an absolute maximum of 9,000 INR [HARD LIMIT]",
+        "Assumes artist availability and scheduling fit for Café setting with no formal stage [HARD LIMIT]",
+        "Assumes artist can accommodate operational requirement: equipment (Compact setup preferred (no massive band setup); venue PA/speakers setup is unconfirmed) [HARD LIMIT]"
       ],
       "uncertainty": [
-        "Capability 'live_vs_studio_context' is unverified in portfolio (status: insufficient_evidence)",
-        "Capability 'audio_arrangement_characteristics' is unverified in portfolio (status: insufficient_evidence)",
-        "Capability 'genre_style_signal' is unverified in portfolio (status: insufficient_evidence)",
-        "Operational constraint 'date_availability' (Next Friday evening, from 7:00 PM to 10:00 PM) requires manual verification with artist",
-        "Operational constraint 'budget' (Target budget around 7,000 INR with an absolute maximum limit of 9,000 INR) requires manual verification with artist",
-        "Operational constraint 'location' (Café venue with no dedicated stage area, requiring a small act/setup footprint) requires manual verification with artist",
-        "Operational constraint 'equipment' (Café has some sound equipment but usability for live musical performance is unconfirmed) requires manual verification with artist"
+        "Operational constraint 'date_availability' (Next Friday from 7:00 PM to 10:00 PM) requires manual verification with artist",
+        "Operational constraint 'budget' (Target around 7,000 INR with an absolute maximum of 9,000 INR) requires manual verification with artist",
+        "Operational constraint 'location' (Café setting with no formal stage) requires manual verification with artist",
+        "Operational constraint 'equipment' (Compact setup preferred (no massive band setup); venue PA/speakers setup is unconfirmed) requires manual verification with artist"
       ],
       "improve_your_matches": {
         "section_title": "Improve your matches",
@@ -265,22 +221,22 @@
         "refinement_questions": [
           {
             "question": "Do you have an in-house PA/speakers and mic available for live music, or should the artist bring complete sound equipment?",
-            "expected_impact": "Clarifies equipment constraints. If the cafe has no usable PA, solo artists with self-contained amplification will rank higher."
+            "expected_impact": "If self-amplification is required, this adds an equipment-fitconstraint that must be verified separately; it does not altercapability scores unless a corresponding demonstrated capabilitydimension is present."
           },
           {
             "question": "Would you prefer primarily Hindi acoustic vocals, English covers, or a balanced bilingual set for background dining?",
-            "expected_impact": "Refines style matching against artists with demonstrated vocal repertoire in the preferred language."
+            "expected_impact": "The answer clarifies the desired repertoire/style context and can affect ranking only where the selected preference maps to an existing scored capability dimension."
           }
         ]
       },
       "refinement_questions": [
         {
           "question": "Do you have an in-house PA/speakers and mic available for live music, or should the artist bring complete sound equipment?",
-          "expected_impact": "Clarifies equipment constraints. If the cafe has no usable PA, solo artists with self-contained amplification will rank higher."
+          "expected_impact": "If self-amplification is required, this adds an equipment-fitconstraint that must be verified separately; it does not altercapability scores unless a corresponding demonstrated capabilitydimension is present."
         },
         {
           "question": "Would you prefer primarily Hindi acoustic vocals, English covers, or a balanced bilingual set for background dining?",
-          "expected_impact": "Refines style matching against artists with demonstrated vocal repertoire in the preferred language."
+          "expected_impact": "The answer clarifies the desired repertoire/style context and can affect ranking only where the selected preference maps to an existing scored capability dimension."
         }
       ]
     },
@@ -293,27 +249,51 @@
         "artist_category": "photographer",
         "capability_requirements": [
           {
-            "requirement_text": "Skincare product photography featuring clean and premium aesthetic (not clinical white)",
+            "requirement_text": "Product photography for skincare bottles and jars",
             "mapped_dimensions": [
-              "subject_domain",
-              "color_tone_treatment"
+              "subject_domain"
             ],
             "importance": "must_have"
           },
           {
-            "requirement_text": "Framing and composition suitable for website and Instagram (square and vertical crops)",
+            "requirement_text": "Clean, premium visual aesthetic without looking overly clinical or stark white",
+            "mapped_dimensions": [
+              "color_tone_treatment",
+              "lighting_treatment",
+              "shooting_context_style"
+            ],
+            "importance": "must_have"
+          },
+          {
+            "requirement_text": "Ability to handle simple lighting/prop setup independently",
+            "mapped_dimensions": [
+              "environment_context",
+              "technical_control_indicators"
+            ],
+            "importance": "must_have"
+          },
+          {
+            "requirement_text": "Hand shot with model if model is locked",
+            "mapped_dimensions": [
+              "subject_domain",
+              "composition_technique"
+            ],
+            "importance": "nice_to_have"
+          },
+          {
+            "requirement_text": "Framing suitable for square and vertical crops for website and social media",
             "mapped_dimensions": [
               "composition_technique"
             ],
             "importance": "must_have"
           },
           {
-            "requirement_text": "Capability to manage a simple setup independently with basic props",
+            "requirement_text": "Basic retouching of final images",
             "mapped_dimensions": [
-              "technical_control_indicators",
-              "environment_context"
+              "color_tone_treatment",
+              "technical_control_indicators"
             ],
-            "importance": "nice_to_have"
+            "importance": "must_have"
           }
         ],
         "operational_constraints": [
@@ -324,12 +304,12 @@
           },
           {
             "category": "turnaround_time",
-            "detail": "Image selects required within 2 days",
+            "detail": "Selects required within 2 days",
             "hard_limit": true
           },
           {
             "category": "budget",
-            "detail": "Around 18k including basic retouching for approximately 12 final images",
+            "detail": "Budget around 18,000 INR including basic retouching",
             "hard_limit": false
           },
           {
@@ -339,8 +319,13 @@
           },
           {
             "category": "usage_rights",
-            "detail": "Website and social media (Instagram) channels",
+            "detail": "Website and Instagram/social channels",
             "hard_limit": false
+          },
+          {
+            "category": "other",
+            "detail": "12 final images required",
+            "hard_limit": true
           }
         ],
         "source_file": "02_skincare_photography_chat.txt",
@@ -353,173 +338,226 @@
         {
           "artist_id": "P01",
           "display_name": "Aanya Rao",
-          "total_score": 1.5,
+          "total_score": 30.0,
           "score_breakdown": {
             "subject_domain": {
               "status": "demonstrated",
-              "confidence": "low",
-              "importance": "must_have",
-              "points": 1.0
+              "confidence": "high",
+              "importance": "nice_to_have",
+              "points": 1.5
             },
             "color_tone_treatment": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
+              "status": "demonstrated",
+              "confidence": "high",
               "importance": "must_have",
-              "points": 0.0
+              "points": 3.0
             },
-            "composition_technique": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
+            "lighting_treatment": {
+              "status": "demonstrated",
+              "confidence": "high",
               "importance": "must_have",
-              "points": 0.0
+              "points": 3.0
             },
-            "technical_control_indicators": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
-              "importance": "nice_to_have",
-              "points": 0.0
+            "shooting_context_style": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
             },
             "environment_context": {
               "status": "demonstrated",
-              "confidence": "low",
-              "importance": "nice_to_have",
-              "points": 0.5
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
+            },
+            "technical_control_indicators": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
+            },
+            "composition_technique": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
             }
           },
           "reasons": [
-            "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Skincare product photography featuring clean and premium aesthetic (not clinical white)'",
-            "Demonstrated 'environment_context' (low confidence, nice_to_have) directly matches requirement 'Capability to manage a simple setup independently with basic props'"
+            "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Product photography for skincare bottles and jars': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+            "Demonstrated 'color_tone_treatment' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Uses saturated color profiles ranging from deep blues and purples in concert stage lighting to rich warm amber tones in ",
+            "Demonstrated 'lighting_treatment' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Shows management of low-light and night shooting environments, balancing ambient interior warm lights, decorative string",
+            "Demonstrated 'shooting_context_style' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Applies a candid, documentary-style approach capturing live stage performances, audience reactions, and spontaneous stre",
+            "Demonstrated 'environment_context' (high confidence, must_have) directly matches requirement 'Ability to handle simple lighting/prop setup independently': Captures both outdoor night environments (rooftop deck, outdoor festival grounds, urban streets) and indoor/hospitality ",
+            "Demonstrated 'technical_control_indicators' (high confidence, must_have) directly matches requirement 'Ability to handle simple lighting/prop setup independently': Demonstrates shallow depth-of-field control isolating foreground subjects from blurred backgrounds, freeze-motion captur",
+            "Demonstrated 'subject_domain' (high confidence, nice_to_have) directly matches requirement 'Hand shot with model if model is locked': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+            "Demonstrated 'composition_technique' (high confidence, nice_to_have) directly matches requirement 'Hand shot with model if model is locked': Demonstrates varied framing techniques including centered portrait subjects, wide-angle stage shots utilizing leading ca",
+            "Demonstrated 'composition_technique' (high confidence, must_have) directly matches requirement 'Framing suitable for square and vertical crops for website and social media': Demonstrates varied framing techniques including centered portrait subjects, wide-angle stage shots utilizing leading ca",
+            "Demonstrated 'color_tone_treatment' (high confidence, must_have) directly matches requirement 'Basic retouching of final images': Uses saturated color profiles ranging from deep blues and purples in concert stage lighting to rich warm amber tones in ",
+            "Demonstrated 'technical_control_indicators' (high confidence, must_have) directly matches requirement 'Basic retouching of final images': Demonstrates shallow depth-of-field control isolating foreground subjects from blurred backgrounds, freeze-motion captur"
           ],
           "trade_offs": [
-            "No demonstrated portfolio evidence for 'color_tone_treatment' (must_have) matching requirement 'Skincare product photography featuring clean and premium aesthetic (not clinical white)'",
-            "No demonstrated portfolio evidence for 'composition_technique' (must_have) matching requirement 'Framing and composition suitable for website and Instagram (square and vertical crops)'",
-            "No demonstrated portfolio evidence for 'technical_control_indicators' (nice_to_have) matching requirement 'Capability to manage a simple setup independently with basic props'"
+            "No critical capability gaps identified from available evidence."
           ],
           "assumptions": [
             "Assumes artist availability and scheduling fit for Shoot required next week [HARD LIMIT]",
-            "Assumes artist can accommodate operational requirement: turnaround_time (Image selects required within 2 days) [HARD LIMIT]",
-            "Assumes artist standard fee can align with requested budget: Around 18k including basic retouching for approximately 12 final images",
+            "Assumes artist can accommodate operational requirement: turnaround_time (Selects required within 2 days) [HARD LIMIT]",
+            "Assumes artist standard fee can align with requested budget: Budget around 18,000 INR including basic retouching",
             "Assumes artist availability and scheduling fit for Gurgaon preferred, Delhi acceptable",
-            "Assumes artist can accommodate operational requirement: usage_rights (Website and social media (Instagram) channels)"
+            "Assumes artist can accommodate operational requirement: usage_rights (Website and Instagram/social channels)",
+            "Assumes artist can accommodate operational requirement: other (12 final images required) [HARD LIMIT]"
           ],
           "uncertainty": [
-            "Capability 'color_tone_treatment' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'composition_technique' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'technical_control_indicators' is unverified in portfolio (status: insufficient_evidence)",
             "Operational constraint 'date_availability' (Shoot required next week) requires manual verification with artist",
-            "Operational constraint 'turnaround_time' (Image selects required within 2 days) requires manual verification with artist",
-            "Operational constraint 'budget' (Around 18k including basic retouching for approximately 12 final images) requires manual verification with artist",
+            "Operational constraint 'turnaround_time' (Selects required within 2 days) requires manual verification with artist",
+            "Operational constraint 'budget' (Budget around 18,000 INR including basic retouching) requires manual verification with artist",
             "Operational constraint 'location' (Gurgaon preferred, Delhi acceptable) requires manual verification with artist",
-            "Operational constraint 'usage_rights' (Website and social media (Instagram) channels) requires manual verification with artist"
+            "Operational constraint 'usage_rights' (Website and Instagram/social channels) requires manual verification with artist",
+            "Operational constraint 'other' (12 final images required) requires manual verification with artist"
           ],
           "operational_constraint_notes": [
             "date_availability: Shoot required next week [HARD LIMIT] — verify with artist",
-            "turnaround_time: Image selects required within 2 days [HARD LIMIT] — verify with artist",
-            "budget: Around 18k including basic retouching for approximately 12 final images — verify with artist",
+            "turnaround_time: Selects required within 2 days [HARD LIMIT] — verify with artist",
+            "budget: Budget around 18,000 INR including basic retouching — verify with artist",
             "location: Gurgaon preferred, Delhi acceptable — verify with artist",
-            "usage_rights: Website and social media (Instagram) channels — verify with artist"
+            "usage_rights: Website and Instagram/social channels — verify with artist",
+            "other: 12 final images required [HARD LIMIT] — verify with artist"
           ],
           "rank": 1
         },
         {
           "artist_id": "P02",
           "display_name": "Kabir Mehta",
-          "total_score": 1.5,
+          "total_score": 30.0,
           "score_breakdown": {
             "subject_domain": {
               "status": "demonstrated",
-              "confidence": "low",
-              "importance": "must_have",
-              "points": 1.0
+              "confidence": "high",
+              "importance": "nice_to_have",
+              "points": 1.5
             },
             "color_tone_treatment": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
+              "status": "demonstrated",
+              "confidence": "high",
               "importance": "must_have",
-              "points": 0.0
+              "points": 3.0
             },
-            "composition_technique": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
+            "lighting_treatment": {
+              "status": "demonstrated",
+              "confidence": "high",
               "importance": "must_have",
-              "points": 0.0
+              "points": 3.0
             },
-            "technical_control_indicators": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
-              "importance": "nice_to_have",
-              "points": 0.0
+            "shooting_context_style": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
             },
             "environment_context": {
               "status": "demonstrated",
-              "confidence": "low",
-              "importance": "nice_to_have",
-              "points": 0.5
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
+            },
+            "technical_control_indicators": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
+            },
+            "composition_technique": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "points": 3.0
             }
           },
           "reasons": [
-            "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Skincare product photography featuring clean and premium aesthetic (not clinical white)'",
-            "Demonstrated 'environment_context' (low confidence, nice_to_have) directly matches requirement 'Capability to manage a simple setup independently with basic props'"
+            "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Product photography for skincare bottles and jars': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+            "Demonstrated 'color_tone_treatment' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Demonstrates diverse color grading styles ranging from desaturated cool tones to vibrant monochrome color schemes (orang",
+            "Demonstrated 'lighting_treatment' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Utilizes studio strobe and softbox setups, high-key studio lighting, artificial backlight creating light halos, soft dir",
+            "Demonstrated 'shooting_context_style' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Demonstrates directed studio posing, staged product arrangements, and behind-the-scenes documentary-style capture.",
+            "Demonstrated 'environment_context' (high confidence, must_have) directly matches requirement 'Ability to handle simple lighting/prop setup independently': Works in both outdoor urban architectural settings and indoor seamless studio/tabletop environments.",
+            "Demonstrated 'technical_control_indicators' (high confidence, must_have) directly matches requirement 'Ability to handle simple lighting/prop setup independently': Shows precise control over depth of field, high-speed shutter action freeze for fluid splashes, and crisp focal sharpnes",
+            "Demonstrated 'subject_domain' (high confidence, nice_to_have) directly matches requirement 'Hand shot with model if model is locked': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+            "Demonstrated 'composition_technique' (high confidence, nice_to_have) directly matches requirement 'Hand shot with model if model is locked': Employs varied compositional choices including extreme low-angle perspective between tall buildings, centered symmetrica",
+            "Demonstrated 'composition_technique' (high confidence, must_have) directly matches requirement 'Framing suitable for square and vertical crops for website and social media': Employs varied compositional choices including extreme low-angle perspective between tall buildings, centered symmetrica",
+            "Demonstrated 'color_tone_treatment' (high confidence, must_have) directly matches requirement 'Basic retouching of final images': Demonstrates diverse color grading styles ranging from desaturated cool tones to vibrant monochrome color schemes (orang",
+            "Demonstrated 'technical_control_indicators' (high confidence, must_have) directly matches requirement 'Basic retouching of final images': Shows precise control over depth of field, high-speed shutter action freeze for fluid splashes, and crisp focal sharpnes"
           ],
           "trade_offs": [
-            "No demonstrated portfolio evidence for 'color_tone_treatment' (must_have) matching requirement 'Skincare product photography featuring clean and premium aesthetic (not clinical white)'",
-            "No demonstrated portfolio evidence for 'composition_technique' (must_have) matching requirement 'Framing and composition suitable for website and Instagram (square and vertical crops)'",
-            "No demonstrated portfolio evidence for 'technical_control_indicators' (nice_to_have) matching requirement 'Capability to manage a simple setup independently with basic props'"
+            "No critical capability gaps identified from available evidence."
           ],
           "assumptions": [
             "Assumes artist availability and scheduling fit for Shoot required next week [HARD LIMIT]",
-            "Assumes artist can accommodate operational requirement: turnaround_time (Image selects required within 2 days) [HARD LIMIT]",
-            "Assumes artist standard fee can align with requested budget: Around 18k including basic retouching for approximately 12 final images",
+            "Assumes artist can accommodate operational requirement: turnaround_time (Selects required within 2 days) [HARD LIMIT]",
+            "Assumes artist standard fee can align with requested budget: Budget around 18,000 INR including basic retouching",
             "Assumes artist availability and scheduling fit for Gurgaon preferred, Delhi acceptable",
-            "Assumes artist can accommodate operational requirement: usage_rights (Website and social media (Instagram) channels)"
+            "Assumes artist can accommodate operational requirement: usage_rights (Website and Instagram/social channels)",
+            "Assumes artist can accommodate operational requirement: other (12 final images required) [HARD LIMIT]"
           ],
           "uncertainty": [
-            "Capability 'color_tone_treatment' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'composition_technique' is unverified in portfolio (status: insufficient_evidence)",
-            "Capability 'technical_control_indicators' is unverified in portfolio (status: insufficient_evidence)",
             "Operational constraint 'date_availability' (Shoot required next week) requires manual verification with artist",
-            "Operational constraint 'turnaround_time' (Image selects required within 2 days) requires manual verification with artist",
-            "Operational constraint 'budget' (Around 18k including basic retouching for approximately 12 final images) requires manual verification with artist",
+            "Operational constraint 'turnaround_time' (Selects required within 2 days) requires manual verification with artist",
+            "Operational constraint 'budget' (Budget around 18,000 INR including basic retouching) requires manual verification with artist",
             "Operational constraint 'location' (Gurgaon preferred, Delhi acceptable) requires manual verification with artist",
-            "Operational constraint 'usage_rights' (Website and social media (Instagram) channels) requires manual verification with artist"
+            "Operational constraint 'usage_rights' (Website and Instagram/social channels) requires manual verification with artist",
+            "Operational constraint 'other' (12 final images required) requires manual verification with artist"
           ],
           "operational_constraint_notes": [
             "date_availability: Shoot required next week [HARD LIMIT] — verify with artist",
-            "turnaround_time: Image selects required within 2 days [HARD LIMIT] — verify with artist",
-            "budget: Around 18k including basic retouching for approximately 12 final images — verify with artist",
+            "turnaround_time: Selects required within 2 days [HARD LIMIT] — verify with artist",
+            "budget: Budget around 18,000 INR including basic retouching — verify with artist",
             "location: Gurgaon preferred, Delhi acceptable — verify with artist",
-            "usage_rights: Website and social media (Instagram) channels — verify with artist"
+            "usage_rights: Website and Instagram/social channels — verify with artist",
+            "other: 12 final images required [HARD LIMIT] — verify with artist"
           ],
           "rank": 2
         }
       ],
       "reasons": [
-        "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Skincare product photography featuring clean and premium aesthetic (not clinical white)'",
-        "Demonstrated 'environment_context' (low confidence, nice_to_have) directly matches requirement 'Capability to manage a simple setup independently with basic props'",
-        "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Skincare product photography featuring clean and premium aesthetic (not clinical white)'",
-        "Demonstrated 'environment_context' (low confidence, nice_to_have) directly matches requirement 'Capability to manage a simple setup independently with basic props'"
+        "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Product photography for skincare bottles and jars': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+        "Demonstrated 'color_tone_treatment' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Uses saturated color profiles ranging from deep blues and purples in concert stage lighting to rich warm amber tones in ",
+        "Demonstrated 'lighting_treatment' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Shows management of low-light and night shooting environments, balancing ambient interior warm lights, decorative string",
+        "Demonstrated 'shooting_context_style' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Applies a candid, documentary-style approach capturing live stage performances, audience reactions, and spontaneous stre",
+        "Demonstrated 'environment_context' (high confidence, must_have) directly matches requirement 'Ability to handle simple lighting/prop setup independently': Captures both outdoor night environments (rooftop deck, outdoor festival grounds, urban streets) and indoor/hospitality ",
+        "Demonstrated 'technical_control_indicators' (high confidence, must_have) directly matches requirement 'Ability to handle simple lighting/prop setup independently': Demonstrates shallow depth-of-field control isolating foreground subjects from blurred backgrounds, freeze-motion captur",
+        "Demonstrated 'subject_domain' (high confidence, nice_to_have) directly matches requirement 'Hand shot with model if model is locked': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+        "Demonstrated 'composition_technique' (high confidence, nice_to_have) directly matches requirement 'Hand shot with model if model is locked': Demonstrates varied framing techniques including centered portrait subjects, wide-angle stage shots utilizing leading ca",
+        "Demonstrated 'composition_technique' (high confidence, must_have) directly matches requirement 'Framing suitable for square and vertical crops for website and social media': Demonstrates varied framing techniques including centered portrait subjects, wide-angle stage shots utilizing leading ca",
+        "Demonstrated 'color_tone_treatment' (high confidence, must_have) directly matches requirement 'Basic retouching of final images': Uses saturated color profiles ranging from deep blues and purples in concert stage lighting to rich warm amber tones in ",
+        "Demonstrated 'technical_control_indicators' (high confidence, must_have) directly matches requirement 'Basic retouching of final images': Demonstrates shallow depth-of-field control isolating foreground subjects from blurred backgrounds, freeze-motion captur",
+        "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Product photography for skincare bottles and jars': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+        "Demonstrated 'color_tone_treatment' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Demonstrates diverse color grading styles ranging from desaturated cool tones to vibrant monochrome color schemes (orang",
+        "Demonstrated 'lighting_treatment' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Utilizes studio strobe and softbox setups, high-key studio lighting, artificial backlight creating light halos, soft dir",
+        "Demonstrated 'shooting_context_style' (high confidence, must_have) directly matches requirement 'Clean, premium visual aesthetic without looking overly clinical or stark white': Demonstrates directed studio posing, staged product arrangements, and behind-the-scenes documentary-style capture.",
+        "Demonstrated 'environment_context' (high confidence, must_have) directly matches requirement 'Ability to handle simple lighting/prop setup independently': Works in both outdoor urban architectural settings and indoor seamless studio/tabletop environments.",
+        "Demonstrated 'technical_control_indicators' (high confidence, must_have) directly matches requirement 'Ability to handle simple lighting/prop setup independently': Shows precise control over depth of field, high-speed shutter action freeze for fluid splashes, and crisp focal sharpnes",
+        "Demonstrated 'subject_domain' (high confidence, nice_to_have) directly matches requirement 'Hand shot with model if model is locked': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+        "Demonstrated 'composition_technique' (high confidence, nice_to_have) directly matches requirement 'Hand shot with model if model is locked': Employs varied compositional choices including extreme low-angle perspective between tall buildings, centered symmetrica",
+        "Demonstrated 'composition_technique' (high confidence, must_have) directly matches requirement 'Framing suitable for square and vertical crops for website and social media': Employs varied compositional choices including extreme low-angle perspective between tall buildings, centered symmetrica",
+        "Demonstrated 'color_tone_treatment' (high confidence, must_have) directly matches requirement 'Basic retouching of final images': Demonstrates diverse color grading styles ranging from desaturated cool tones to vibrant monochrome color schemes (orang",
+        "Demonstrated 'technical_control_indicators' (high confidence, must_have) directly matches requirement 'Basic retouching of final images': Shows precise control over depth of field, high-speed shutter action freeze for fluid splashes, and crisp focal sharpnes"
       ],
       "trade_offs": [
-        "No demonstrated portfolio evidence for 'color_tone_treatment' (must_have) matching requirement 'Skincare product photography featuring clean and premium aesthetic (not clinical white)'",
-        "No demonstrated portfolio evidence for 'composition_technique' (must_have) matching requirement 'Framing and composition suitable for website and Instagram (square and vertical crops)'",
-        "No demonstrated portfolio evidence for 'technical_control_indicators' (nice_to_have) matching requirement 'Capability to manage a simple setup independently with basic props'"
+        "No critical capability gaps identified from available evidence."
       ],
       "assumptions": [
         "Assumes artist availability and scheduling fit for Shoot required next week [HARD LIMIT]",
-        "Assumes artist can accommodate operational requirement: turnaround_time (Image selects required within 2 days) [HARD LIMIT]",
-        "Assumes artist standard fee can align with requested budget: Around 18k including basic retouching for approximately 12 final images",
+        "Assumes artist can accommodate operational requirement: turnaround_time (Selects required within 2 days) [HARD LIMIT]",
+        "Assumes artist standard fee can align with requested budget: Budget around 18,000 INR including basic retouching",
         "Assumes artist availability and scheduling fit for Gurgaon preferred, Delhi acceptable",
-        "Assumes artist can accommodate operational requirement: usage_rights (Website and social media (Instagram) channels)"
+        "Assumes artist can accommodate operational requirement: usage_rights (Website and Instagram/social channels)",
+        "Assumes artist can accommodate operational requirement: other (12 final images required) [HARD LIMIT]"
       ],
       "uncertainty": [
-        "Capability 'color_tone_treatment' is unverified in portfolio (status: insufficient_evidence)",
-        "Capability 'composition_technique' is unverified in portfolio (status: insufficient_evidence)",
-        "Capability 'technical_control_indicators' is unverified in portfolio (status: insufficient_evidence)",
         "Operational constraint 'date_availability' (Shoot required next week) requires manual verification with artist",
-        "Operational constraint 'turnaround_time' (Image selects required within 2 days) requires manual verification with artist",
-        "Operational constraint 'budget' (Around 18k including basic retouching for approximately 12 final images) requires manual verification with artist",
+        "Operational constraint 'turnaround_time' (Selects required within 2 days) requires manual verification with artist",
+        "Operational constraint 'budget' (Budget around 18,000 INR including basic retouching) requires manual verification with artist",
         "Operational constraint 'location' (Gurgaon preferred, Delhi acceptable) requires manual verification with artist",
-        "Operational constraint 'usage_rights' (Website and social media (Instagram) channels) requires manual verification with artist"
+        "Operational constraint 'usage_rights' (Website and Instagram/social channels) requires manual verification with artist",
+        "Operational constraint 'other' (12 final images required) requires manual verification with artist"
       ],
       "improve_your_matches": {
         "section_title": "Improve your matches",
@@ -527,22 +565,22 @@
         "refinement_questions": [
           {
             "question": "Will a model definitely be present for hand/interaction shots, or is this strictly tabletop product-only arrangements?",
-            "expected_impact": "If human model interaction is confirmed, photographers with demonstrated talent direction and portraiture will rank higher."
+            "expected_impact": "If human interaction shots are required, the relevant demonstrated portrait or talent-direction dimensions become more important where those dimensions are part of the scored capability vocabulary."
           },
           {
             "question": "Do you need the photographer to provide backdrops and specialized tabletop lighting props, or will your team supply all staging materials?",
-            "expected_impact": "Filters for photographers with proven standalone tabletop studio lighting technical control."
+            "expected_impact": "Clarifies whether equipment provision is an operational responsibility or a demonstrated capability requirement; equipment logistics are not treated as demonstrated skill without supporting evidence."
           }
         ]
       },
       "refinement_questions": [
         {
           "question": "Will a model definitely be present for hand/interaction shots, or is this strictly tabletop product-only arrangements?",
-          "expected_impact": "If human model interaction is confirmed, photographers with demonstrated talent direction and portraiture will rank higher."
+          "expected_impact": "If human interaction shots are required, the relevant demonstrated portrait or talent-direction dimensions become more important where those dimensions are part of the scored capability vocabulary."
         },
         {
           "question": "Do you need the photographer to provide backdrops and specialized tabletop lighting props, or will your team supply all staging materials?",
-          "expected_impact": "Filters for photographers with proven standalone tabletop studio lighting technical control."
+          "expected_impact": "Clarifies whether equipment provision is an operational responsibility or a demonstrated capability requirement; equipment logistics are not treated as demonstrated skill without supporting evidence."
         }
       ]
     },
@@ -555,28 +593,28 @@
         "artist_category": "video_editor",
         "capability_requirements": [
           {
-            "requirement_text": "Create a 30-second vertical reel in 9:16 aspect ratio from food pop-up event footage",
+            "requirement_text": "Edit a 30-second vertical reel in 9:16 aspect ratio",
             "mapped_dimensions": [
               "content_format_context"
             ],
             "importance": "must_have"
           },
           {
-            "requirement_text": "Curate and sequence approximately 70 raw clips into a story narrative rather than simple chronological order",
+            "requirement_text": "Go through raw footage (approx. 70 clips) to construct a narrative story rather than simple chronological order",
             "mapped_dimensions": [
               "visual_sequencing_signals"
             ],
             "importance": "must_have"
           },
           {
-            "requirement_text": "Energetic yet clean editing style without excessive or over-the-top transitions",
+            "requirement_text": "Energetic yet clean editing pacing without crazy transitions",
             "mapped_dimensions": [
               "pacing_rhythm"
             ],
             "importance": "must_have"
           },
           {
-            "requirement_text": "Add captions for sections where people are speaking or giving customer reactions",
+            "requirement_text": "Include captions wherever dialogue/speaking occurs",
             "mapped_dimensions": [
               "motion_graphics_or_overlay_evidence",
               "audio_dialogue_handling"
@@ -584,7 +622,7 @@
             "importance": "must_have"
           },
           {
-            "requirement_text": "Suggest compliant background music if the original event audio cannot be used legally on Instagram",
+            "requirement_text": "Suggest alternative music compliant with Instagram usage rights if needed",
             "mapped_dimensions": [
               "audio_dialogue_handling"
             ],
@@ -593,18 +631,18 @@
         ],
         "operational_constraints": [
           {
-            "category": "turnaround_time",
-            "detail": "First cut required by Friday evening",
+            "category": "budget",
+            "detail": "8-10k budget",
             "hard_limit": true
           },
           {
-            "category": "budget",
-            "detail": "8,000 - 10,000 currency units",
-            "hard_limit": true
+            "category": "turnaround_time",
+            "detail": "First cut by Friday evening",
+            "hard_limit": false
           },
           {
             "category": "usage_rights",
-            "detail": "Music must be legally compliant for public Instagram posting",
+            "detail": "Music must be cleared/legal for Instagram posting",
             "hard_limit": true
           }
         ],
@@ -618,157 +656,158 @@
         {
           "artist_id": "V01",
           "display_name": "Nisha Kapoor",
-          "total_score": 4.5,
+          "total_score": 8.0,
           "score_breakdown": {
             "content_format_context": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "medium",
               "importance": "must_have",
-              "points": 1.0
+              "points": 2.0
             },
             "visual_sequencing_signals": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "medium",
               "importance": "must_have",
-              "points": 1.0
+              "points": 2.0
             },
             "pacing_rhythm": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "medium",
               "importance": "must_have",
-              "points": 1.0
+              "points": 2.0
             },
             "motion_graphics_or_overlay_evidence": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
+              "status": "demonstrated",
+              "confidence": "medium",
               "importance": "must_have",
-              "points": 0.0
+              "points": 2.0
             },
             "audio_dialogue_handling": {
-              "status": "demonstrated",
-              "confidence": "low",
+              "status": "insufficient_evidence",
+              "confidence": "insufficient",
               "importance": "nice_to_have",
-              "points": 0.5
+              "points": 0.0
             }
           },
           "reasons": [
-            "Demonstrated 'content_format_context' (low confidence, must_have) directly matches requirement 'Create a 30-second vertical reel in 9:16 aspect ratio from food pop-up event footage'",
-            "Demonstrated 'visual_sequencing_signals' (low confidence, must_have) directly matches requirement 'Curate and sequence approximately 70 raw clips into a story narrative rather than simple chronological order'",
-            "Demonstrated 'pacing_rhythm' (low confidence, must_have) directly matches requirement 'Energetic yet clean editing style without excessive or over-the-top transitions'",
-            "Demonstrated 'audio_dialogue_handling' (low confidence, must_have) directly matches requirement 'Add captions for sections where people are speaking or giving customer reactions'",
-            "Demonstrated 'audio_dialogue_handling' (low confidence, nice_to_have) directly matches requirement 'Suggest compliant background music if the original event audio cannot be used legally on Instagram'"
+            "Demonstrated 'content_format_context' (medium confidence, must_have) directly matches requirement 'Edit a 30-second vertical reel in 9:16 aspect ratio': Content includes event recap coverage, stage presentation, and culinary preparation.",
+            "Demonstrated 'visual_sequencing_signals' (medium confidence, must_have) directly matches requirement 'Go through raw footage (approx. 70 clips) to construct a narrative story rather than simple chronological order': Frame sequences depict logical progression across a social event and culinary steps.",
+            "Demonstrated 'pacing_rhythm' (medium confidence, must_have) directly matches requirement 'Energetic yet clean editing pacing without crazy transitions': Sampled frames reflect varied pacing across event gathering and food prep clips.",
+            "Demonstrated 'motion_graphics_or_overlay_evidence' (medium confidence, must_have) directly matches requirement 'Include captions wherever dialogue/speaking occurs': Text graphic overlays and title cards visible in video frames."
           ],
           "trade_offs": [
-            "No demonstrated portfolio evidence for 'motion_graphics_or_overlay_evidence' (must_have) matching requirement 'Add captions for sections where people are speaking or giving customer reactions'"
+            "No demonstrated portfolio evidence for 'audio_dialogue_handling' (must_have) matching requirement 'Include captions wherever dialogue/speaking occurs'",
+            "No demonstrated portfolio evidence for 'audio_dialogue_handling' (nice_to_have) matching requirement 'Suggest alternative music compliant with Instagram usage rights if needed'"
           ],
           "assumptions": [
-            "Assumes artist can accommodate operational requirement: turnaround_time (First cut required by Friday evening) [HARD LIMIT]",
-            "Assumes artist standard fee can align with requested budget: 8,000 - 10,000 currency units [HARD LIMIT]",
-            "Assumes artist can accommodate operational requirement: usage_rights (Music must be legally compliant for public Instagram posting) [HARD LIMIT]"
+            "Assumes artist standard fee can align with requested budget: 8-10k budget [HARD LIMIT]",
+            "Assumes artist can accommodate operational requirement: turnaround_time (First cut by Friday evening)",
+            "Assumes artist can accommodate operational requirement: usage_rights (Music must be cleared/legal for Instagram posting) [HARD LIMIT]"
           ],
           "uncertainty": [
-            "Capability 'motion_graphics_or_overlay_evidence' is unverified in portfolio (status: insufficient_evidence)",
-            "Operational constraint 'turnaround_time' (First cut required by Friday evening) requires manual verification with artist",
-            "Operational constraint 'budget' (8,000 - 10,000 currency units) requires manual verification with artist",
-            "Operational constraint 'usage_rights' (Music must be legally compliant for public Instagram posting) requires manual verification with artist"
+            "Capability 'audio_dialogue_handling' is unverified in portfolio (status: insufficient_evidence)",
+            "Capability 'audio_dialogue_handling' is unverified in portfolio (status: insufficient_evidence)",
+            "Operational constraint 'budget' (8-10k budget) requires manual verification with artist",
+            "Operational constraint 'turnaround_time' (First cut by Friday evening) requires manual verification with artist",
+            "Operational constraint 'usage_rights' (Music must be cleared/legal for Instagram posting) requires manual verification with artist"
           ],
           "operational_constraint_notes": [
-            "turnaround_time: First cut required by Friday evening [HARD LIMIT] — verify with artist",
-            "budget: 8,000 - 10,000 currency units [HARD LIMIT] — verify with artist",
-            "usage_rights: Music must be legally compliant for public Instagram posting [HARD LIMIT] — verify with artist"
+            "budget: 8-10k budget [HARD LIMIT] — verify with artist",
+            "turnaround_time: First cut by Friday evening — verify with artist",
+            "usage_rights: Music must be cleared/legal for Instagram posting [HARD LIMIT] — verify with artist"
           ],
           "rank": 1
         },
         {
           "artist_id": "V02",
           "display_name": "Rehman Ali",
-          "total_score": 4.5,
+          "total_score": 8.0,
           "score_breakdown": {
             "content_format_context": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "medium",
               "importance": "must_have",
-              "points": 1.0
+              "points": 2.0
             },
             "visual_sequencing_signals": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "medium",
               "importance": "must_have",
-              "points": 1.0
+              "points": 2.0
             },
             "pacing_rhythm": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "medium",
               "importance": "must_have",
-              "points": 1.0
+              "points": 2.0
             },
             "motion_graphics_or_overlay_evidence": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
+              "status": "demonstrated",
+              "confidence": "medium",
               "importance": "must_have",
-              "points": 0.0
+              "points": 2.0
             },
             "audio_dialogue_handling": {
-              "status": "demonstrated",
-              "confidence": "low",
+              "status": "insufficient_evidence",
+              "confidence": "insufficient",
               "importance": "nice_to_have",
-              "points": 0.5
+              "points": 0.0
             }
           },
           "reasons": [
-            "Demonstrated 'content_format_context' (low confidence, must_have) directly matches requirement 'Create a 30-second vertical reel in 9:16 aspect ratio from food pop-up event footage'",
-            "Demonstrated 'visual_sequencing_signals' (low confidence, must_have) directly matches requirement 'Curate and sequence approximately 70 raw clips into a story narrative rather than simple chronological order'",
-            "Demonstrated 'pacing_rhythm' (low confidence, must_have) directly matches requirement 'Energetic yet clean editing style without excessive or over-the-top transitions'",
-            "Demonstrated 'audio_dialogue_handling' (low confidence, must_have) directly matches requirement 'Add captions for sections where people are speaking or giving customer reactions'",
-            "Demonstrated 'audio_dialogue_handling' (low confidence, nice_to_have) directly matches requirement 'Suggest compliant background music if the original event audio cannot be used legally on Instagram'"
+            "Demonstrated 'content_format_context' (medium confidence, must_have) directly matches requirement 'Edit a 30-second vertical reel in 9:16 aspect ratio': Formats include corporate workplace explainers, interview reels, and vertical industrial promos.",
+            "Demonstrated 'visual_sequencing_signals' (medium confidence, must_have) directly matches requirement 'Go through raw footage (approx. 70 clips) to construct a narrative story rather than simple chronological order': Sequences indicate logical narrative continuity from entering room to talking and walking in hallways.",
+            "Demonstrated 'pacing_rhythm' (medium confidence, must_have) directly matches requirement 'Energetic yet clean editing pacing without crazy transitions': Visual evidence shows multi-shot structure alternating between A-roll talking heads and office B-roll.",
+            "Demonstrated 'motion_graphics_or_overlay_evidence' (medium confidence, must_have) directly matches requirement 'Include captions wherever dialogue/speaking occurs': Frames show burned-in subtitles, animated text lower thirds, and vertical graphic templates."
           ],
           "trade_offs": [
-            "No demonstrated portfolio evidence for 'motion_graphics_or_overlay_evidence' (must_have) matching requirement 'Add captions for sections where people are speaking or giving customer reactions'"
+            "No demonstrated portfolio evidence for 'audio_dialogue_handling' (must_have) matching requirement 'Include captions wherever dialogue/speaking occurs'",
+            "No demonstrated portfolio evidence for 'audio_dialogue_handling' (nice_to_have) matching requirement 'Suggest alternative music compliant with Instagram usage rights if needed'"
           ],
           "assumptions": [
-            "Assumes artist can accommodate operational requirement: turnaround_time (First cut required by Friday evening) [HARD LIMIT]",
-            "Assumes artist standard fee can align with requested budget: 8,000 - 10,000 currency units [HARD LIMIT]",
-            "Assumes artist can accommodate operational requirement: usage_rights (Music must be legally compliant for public Instagram posting) [HARD LIMIT]"
+            "Assumes artist standard fee can align with requested budget: 8-10k budget [HARD LIMIT]",
+            "Assumes artist can accommodate operational requirement: turnaround_time (First cut by Friday evening)",
+            "Assumes artist can accommodate operational requirement: usage_rights (Music must be cleared/legal for Instagram posting) [HARD LIMIT]"
           ],
           "uncertainty": [
-            "Capability 'motion_graphics_or_overlay_evidence' is unverified in portfolio (status: insufficient_evidence)",
-            "Operational constraint 'turnaround_time' (First cut required by Friday evening) requires manual verification with artist",
-            "Operational constraint 'budget' (8,000 - 10,000 currency units) requires manual verification with artist",
-            "Operational constraint 'usage_rights' (Music must be legally compliant for public Instagram posting) requires manual verification with artist"
+            "Capability 'audio_dialogue_handling' is unverified in portfolio (status: insufficient_evidence)",
+            "Capability 'audio_dialogue_handling' is unverified in portfolio (status: insufficient_evidence)",
+            "Operational constraint 'budget' (8-10k budget) requires manual verification with artist",
+            "Operational constraint 'turnaround_time' (First cut by Friday evening) requires manual verification with artist",
+            "Operational constraint 'usage_rights' (Music must be cleared/legal for Instagram posting) requires manual verification with artist"
           ],
           "operational_constraint_notes": [
-            "turnaround_time: First cut required by Friday evening [HARD LIMIT] — verify with artist",
-            "budget: 8,000 - 10,000 currency units [HARD LIMIT] — verify with artist",
-            "usage_rights: Music must be legally compliant for public Instagram posting [HARD LIMIT] — verify with artist"
+            "budget: 8-10k budget [HARD LIMIT] — verify with artist",
+            "turnaround_time: First cut by Friday evening — verify with artist",
+            "usage_rights: Music must be cleared/legal for Instagram posting [HARD LIMIT] — verify with artist"
           ],
           "rank": 2
         }
       ],
       "reasons": [
-        "Demonstrated 'content_format_context' (low confidence, must_have) directly matches requirement 'Create a 30-second vertical reel in 9:16 aspect ratio from food pop-up event footage'",
-        "Demonstrated 'visual_sequencing_signals' (low confidence, must_have) directly matches requirement 'Curate and sequence approximately 70 raw clips into a story narrative rather than simple chronological order'",
-        "Demonstrated 'pacing_rhythm' (low confidence, must_have) directly matches requirement 'Energetic yet clean editing style without excessive or over-the-top transitions'",
-        "Demonstrated 'audio_dialogue_handling' (low confidence, must_have) directly matches requirement 'Add captions for sections where people are speaking or giving customer reactions'",
-        "Demonstrated 'audio_dialogue_handling' (low confidence, nice_to_have) directly matches requirement 'Suggest compliant background music if the original event audio cannot be used legally on Instagram'",
-        "Demonstrated 'content_format_context' (low confidence, must_have) directly matches requirement 'Create a 30-second vertical reel in 9:16 aspect ratio from food pop-up event footage'",
-        "Demonstrated 'visual_sequencing_signals' (low confidence, must_have) directly matches requirement 'Curate and sequence approximately 70 raw clips into a story narrative rather than simple chronological order'",
-        "Demonstrated 'pacing_rhythm' (low confidence, must_have) directly matches requirement 'Energetic yet clean editing style without excessive or over-the-top transitions'",
-        "Demonstrated 'audio_dialogue_handling' (low confidence, must_have) directly matches requirement 'Add captions for sections where people are speaking or giving customer reactions'",
-        "Demonstrated 'audio_dialogue_handling' (low confidence, nice_to_have) directly matches requirement 'Suggest compliant background music if the original event audio cannot be used legally on Instagram'"
+        "Demonstrated 'content_format_context' (medium confidence, must_have) directly matches requirement 'Edit a 30-second vertical reel in 9:16 aspect ratio': Content includes event recap coverage, stage presentation, and culinary preparation.",
+        "Demonstrated 'visual_sequencing_signals' (medium confidence, must_have) directly matches requirement 'Go through raw footage (approx. 70 clips) to construct a narrative story rather than simple chronological order': Frame sequences depict logical progression across a social event and culinary steps.",
+        "Demonstrated 'pacing_rhythm' (medium confidence, must_have) directly matches requirement 'Energetic yet clean editing pacing without crazy transitions': Sampled frames reflect varied pacing across event gathering and food prep clips.",
+        "Demonstrated 'motion_graphics_or_overlay_evidence' (medium confidence, must_have) directly matches requirement 'Include captions wherever dialogue/speaking occurs': Text graphic overlays and title cards visible in video frames.",
+        "Demonstrated 'content_format_context' (medium confidence, must_have) directly matches requirement 'Edit a 30-second vertical reel in 9:16 aspect ratio': Formats include corporate workplace explainers, interview reels, and vertical industrial promos.",
+        "Demonstrated 'visual_sequencing_signals' (medium confidence, must_have) directly matches requirement 'Go through raw footage (approx. 70 clips) to construct a narrative story rather than simple chronological order': Sequences indicate logical narrative continuity from entering room to talking and walking in hallways.",
+        "Demonstrated 'pacing_rhythm' (medium confidence, must_have) directly matches requirement 'Energetic yet clean editing pacing without crazy transitions': Visual evidence shows multi-shot structure alternating between A-roll talking heads and office B-roll.",
+        "Demonstrated 'motion_graphics_or_overlay_evidence' (medium confidence, must_have) directly matches requirement 'Include captions wherever dialogue/speaking occurs': Frames show burned-in subtitles, animated text lower thirds, and vertical graphic templates."
       ],
       "trade_offs": [
-        "No demonstrated portfolio evidence for 'motion_graphics_or_overlay_evidence' (must_have) matching requirement 'Add captions for sections where people are speaking or giving customer reactions'"
+        "No demonstrated portfolio evidence for 'audio_dialogue_handling' (must_have) matching requirement 'Include captions wherever dialogue/speaking occurs'",
+        "No demonstrated portfolio evidence for 'audio_dialogue_handling' (nice_to_have) matching requirement 'Suggest alternative music compliant with Instagram usage rights if needed'"
       ],
       "assumptions": [
-        "Assumes artist can accommodate operational requirement: turnaround_time (First cut required by Friday evening) [HARD LIMIT]",
-        "Assumes artist standard fee can align with requested budget: 8,000 - 10,000 currency units [HARD LIMIT]",
-        "Assumes artist can accommodate operational requirement: usage_rights (Music must be legally compliant for public Instagram posting) [HARD LIMIT]"
+        "Assumes artist standard fee can align with requested budget: 8-10k budget [HARD LIMIT]",
+        "Assumes artist can accommodate operational requirement: turnaround_time (First cut by Friday evening)",
+        "Assumes artist can accommodate operational requirement: usage_rights (Music must be cleared/legal for Instagram posting) [HARD LIMIT]"
       ],
       "uncertainty": [
-        "Capability 'motion_graphics_or_overlay_evidence' is unverified in portfolio (status: insufficient_evidence)",
-        "Operational constraint 'turnaround_time' (First cut required by Friday evening) requires manual verification with artist",
-        "Operational constraint 'budget' (8,000 - 10,000 currency units) requires manual verification with artist",
-        "Operational constraint 'usage_rights' (Music must be legally compliant for public Instagram posting) requires manual verification with artist"
+        "Capability 'audio_dialogue_handling' is unverified in portfolio (status: insufficient_evidence)",
+        "Operational constraint 'budget' (8-10k budget) requires manual verification with artist",
+        "Operational constraint 'turnaround_time' (First cut by Friday evening) requires manual verification with artist",
+        "Operational constraint 'usage_rights' (Music must be cleared/legal for Instagram posting) requires manual verification with artist"
       ],
       "improve_your_matches": {
         "section_title": "Improve your matches",
@@ -776,22 +815,22 @@
         "refinement_questions": [
           {
             "question": "Do you require the editor to source and clear commercially licensed background music, or will you supply approved tracks?",
-            "expected_impact": "Favors video editors with demonstrated commercial audio curation and licensing experience."
+            "expected_impact": "Clarifies whether music licensing is an artist responsibility; licensing responsibility is operational unless it maps to an existing demonstrated capability dimension."
           },
           {
             "question": "Are styled kinetic subtitles / animated text overlays required, or standard clean subtitle captions?",
-            "expected_impact": "Distinguishes editors with motion graphics and advanced dialogue typography capabilities."
+            "expected_impact": "If kinetic text is required, editors with demonstrated motion-graphics or text-animation capability become more relevant where those dimensions are part of the scored capability vocabulary."
           }
         ]
       },
       "refinement_questions": [
         {
           "question": "Do you require the editor to source and clear commercially licensed background music, or will you supply approved tracks?",
-          "expected_impact": "Favors video editors with demonstrated commercial audio curation and licensing experience."
+          "expected_impact": "Clarifies whether music licensing is an artist responsibility; licensing responsibility is operational unless it maps to an existing demonstrated capability dimension."
         },
         {
           "question": "Are styled kinetic subtitles / animated text overlays required, or standard clean subtitle captions?",
-          "expected_impact": "Distinguishes editors with motion graphics and advanced dialogue typography capabilities."
+          "expected_impact": "If kinetic text is required, editors with demonstrated motion-graphics or text-animation capability become more relevant where those dimensions are part of the scored capability vocabulary."
         }
       ]
     },
@@ -804,7 +843,7 @@
         "artist_category": "photographer",
         "capability_requirements": [
           {
-            "requirement_text": "Candid event coverage capturing natural interactions, exercises, and reactions during sessions and lunch, avoiding stiff conference style",
+            "requirement_text": "Candid event photography capturing reactions, conversations, and session activities without stiff corporate poses",
             "mapped_dimensions": [
               "shooting_context_style",
               "subject_domain"
@@ -812,7 +851,7 @@
             "importance": "must_have"
           },
           {
-            "requirement_text": "Proper full-team group photograph of all participants",
+            "requirement_text": "Full team group photograph of around 120 people",
             "mapped_dimensions": [
               "subject_domain",
               "composition_technique"
@@ -820,9 +859,10 @@
             "importance": "must_have"
           },
           {
-            "requirement_text": "Quick headshots for 10 to 15 leadership team members",
+            "requirement_text": "Quick corporate headshots for 10-15 leadership team members",
             "mapped_dimensions": [
-              "subject_domain"
+              "subject_domain",
+              "shooting_context_style"
             ],
             "importance": "nice_to_have"
           }
@@ -830,32 +870,27 @@
         "operational_constraints": [
           {
             "category": "date_availability",
-            "detail": "4 September, approximately 10:00 AM to 3:00 PM",
+            "detail": "4 Sept, 10am-3pm",
             "hard_limit": true
           },
           {
             "category": "location",
-            "detail": "South Delhi (venue TBD)",
+            "detail": "South Delhi",
             "hard_limit": true
           },
           {
             "category": "guest_count",
-            "detail": "110 to 130 attendees",
+            "detail": "110-130 attendees (around 120 people)",
             "hard_limit": false
           },
           {
             "category": "turnaround_time",
-            "detail": "8 to 10 photos delivered same evening for LinkedIn; full set delivered later that week",
+            "detail": "8-10 photos delivered the same evening for LinkedIn, remaining photos later that week",
             "hard_limit": true
           },
           {
             "category": "budget",
-            "detail": "No fixed budget provided; requires sensible options for procurement",
-            "hard_limit": false
-          },
-          {
-            "category": "equipment",
-            "detail": "Venue lighting conditions and flash permission currently unknown",
+            "detail": "No fixed budget shared; needs sensible options for procurement review",
             "hard_limit": false
           }
         ],
@@ -869,153 +904,150 @@
         {
           "artist_id": "P01",
           "display_name": "Aanya Rao",
-          "total_score": 3.5,
+          "total_score": 15.0,
           "score_breakdown": {
             "shooting_context_style": {
               "status": "demonstrated",
-              "confidence": "low",
-              "importance": "must_have",
-              "points": 1.0
+              "confidence": "high",
+              "importance": "nice_to_have",
+              "points": 1.5
             },
             "subject_domain": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "high",
               "importance": "nice_to_have",
-              "points": 0.5
+              "points": 1.5
             },
             "composition_technique": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
+              "status": "demonstrated",
+              "confidence": "high",
               "importance": "must_have",
-              "points": 0.0
+              "points": 3.0
             }
           },
           "reasons": [
-            "Demonstrated 'shooting_context_style' (low confidence, must_have) directly matches requirement 'Candid event coverage capturing natural interactions, exercises, and reactions during sessions and lunch, avoiding stiff conference style'",
-            "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Candid event coverage capturing natural interactions, exercises, and reactions during sessions and lunch, avoiding stiff conference style'",
-            "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Proper full-team group photograph of all participants'",
-            "Demonstrated 'subject_domain' (low confidence, nice_to_have) directly matches requirement 'Quick headshots for 10 to 15 leadership team members'"
+            "Demonstrated 'shooting_context_style' (high confidence, must_have) directly matches requirement 'Candid event photography capturing reactions, conversations, and session activities without stiff corporate poses': Applies a candid, documentary-style approach capturing live stage performances, audience reactions, and spontaneous stre",
+            "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Candid event photography capturing reactions, conversations, and session activities without stiff corporate poses': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+            "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Full team group photograph of around 120 people': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+            "Demonstrated 'composition_technique' (high confidence, must_have) directly matches requirement 'Full team group photograph of around 120 people': Demonstrates varied framing techniques including centered portrait subjects, wide-angle stage shots utilizing leading ca",
+            "Demonstrated 'subject_domain' (high confidence, nice_to_have) directly matches requirement 'Quick corporate headshots for 10-15 leadership team members': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+            "Demonstrated 'shooting_context_style' (high confidence, nice_to_have) directly matches requirement 'Quick corporate headshots for 10-15 leadership team members': Applies a candid, documentary-style approach capturing live stage performances, audience reactions, and spontaneous stre"
           ],
           "trade_offs": [
-            "No demonstrated portfolio evidence for 'composition_technique' (must_have) matching requirement 'Proper full-team group photograph of all participants'"
+            "No critical capability gaps identified from available evidence."
           ],
           "assumptions": [
-            "Assumes artist availability and scheduling fit for 4 September, approximately 10:00 AM to 3:00 PM [HARD LIMIT]",
-            "Assumes artist availability and scheduling fit for South Delhi (venue TBD) [HARD LIMIT]",
-            "Assumes artist can accommodate operational requirement: guest_count (110 to 130 attendees)",
-            "Assumes artist can accommodate operational requirement: turnaround_time (8 to 10 photos delivered same evening for LinkedIn; full set delivered later that week) [HARD LIMIT]",
-            "Assumes artist standard fee can align with requested budget: No fixed budget provided; requires sensible options for procurement",
-            "Assumes artist can accommodate operational requirement: equipment (Venue lighting conditions and flash permission currently unknown)"
+            "Assumes artist availability and scheduling fit for 4 Sept, 10am-3pm [HARD LIMIT]",
+            "Assumes artist availability and scheduling fit for South Delhi [HARD LIMIT]",
+            "Assumes artist can accommodate operational requirement: guest_count (110-130 attendees (around 120 people))",
+            "Assumes artist can accommodate operational requirement: turnaround_time (8-10 photos delivered the same evening for LinkedIn, remaining photos later that week) [HARD LIMIT]",
+            "Assumes artist standard fee can align with requested budget: No fixed budget shared; needs sensible options for procurement review"
           ],
           "uncertainty": [
-            "Capability 'composition_technique' is unverified in portfolio (status: insufficient_evidence)",
-            "Operational constraint 'date_availability' (4 September, approximately 10:00 AM to 3:00 PM) requires manual verification with artist",
-            "Operational constraint 'location' (South Delhi (venue TBD)) requires manual verification with artist",
-            "Operational constraint 'guest_count' (110 to 130 attendees) requires manual verification with artist",
-            "Operational constraint 'turnaround_time' (8 to 10 photos delivered same evening for LinkedIn; full set delivered later that week) requires manual verification with artist",
-            "Operational constraint 'budget' (No fixed budget provided; requires sensible options for procurement) requires manual verification with artist",
-            "Operational constraint 'equipment' (Venue lighting conditions and flash permission currently unknown) requires manual verification with artist"
+            "Operational constraint 'date_availability' (4 Sept, 10am-3pm) requires manual verification with artist",
+            "Operational constraint 'location' (South Delhi) requires manual verification with artist",
+            "Operational constraint 'guest_count' (110-130 attendees (around 120 people)) requires manual verification with artist",
+            "Operational constraint 'turnaround_time' (8-10 photos delivered the same evening for LinkedIn, remaining photos later that week) requires manual verification with artist",
+            "Operational constraint 'budget' (No fixed budget shared; needs sensible options for procurement review) requires manual verification with artist"
           ],
           "operational_constraint_notes": [
-            "date_availability: 4 September, approximately 10:00 AM to 3:00 PM [HARD LIMIT] — verify with artist",
-            "location: South Delhi (venue TBD) [HARD LIMIT] — verify with artist",
-            "guest_count: 110 to 130 attendees — verify with artist",
-            "turnaround_time: 8 to 10 photos delivered same evening for LinkedIn; full set delivered later that week [HARD LIMIT] — verify with artist",
-            "budget: No fixed budget provided; requires sensible options for procurement — verify with artist",
-            "equipment: Venue lighting conditions and flash permission currently unknown — verify with artist"
+            "date_availability: 4 Sept, 10am-3pm [HARD LIMIT] — verify with artist",
+            "location: South Delhi [HARD LIMIT] — verify with artist",
+            "guest_count: 110-130 attendees (around 120 people) — verify with artist",
+            "turnaround_time: 8-10 photos delivered the same evening for LinkedIn, remaining photos later that week [HARD LIMIT] — verify with artist",
+            "budget: No fixed budget shared; needs sensible options for procurement review — verify with artist"
           ],
           "rank": 1
         },
         {
           "artist_id": "P02",
           "display_name": "Kabir Mehta",
-          "total_score": 3.5,
+          "total_score": 15.0,
           "score_breakdown": {
             "shooting_context_style": {
               "status": "demonstrated",
-              "confidence": "low",
-              "importance": "must_have",
-              "points": 1.0
+              "confidence": "high",
+              "importance": "nice_to_have",
+              "points": 1.5
             },
             "subject_domain": {
               "status": "demonstrated",
-              "confidence": "low",
+              "confidence": "high",
               "importance": "nice_to_have",
-              "points": 0.5
+              "points": 1.5
             },
             "composition_technique": {
-              "status": "insufficient_evidence",
-              "confidence": "insufficient",
+              "status": "demonstrated",
+              "confidence": "high",
               "importance": "must_have",
-              "points": 0.0
+              "points": 3.0
             }
           },
           "reasons": [
-            "Demonstrated 'shooting_context_style' (low confidence, must_have) directly matches requirement 'Candid event coverage capturing natural interactions, exercises, and reactions during sessions and lunch, avoiding stiff conference style'",
-            "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Candid event coverage capturing natural interactions, exercises, and reactions during sessions and lunch, avoiding stiff conference style'",
-            "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Proper full-team group photograph of all participants'",
-            "Demonstrated 'subject_domain' (low confidence, nice_to_have) directly matches requirement 'Quick headshots for 10 to 15 leadership team members'"
+            "Demonstrated 'shooting_context_style' (high confidence, must_have) directly matches requirement 'Candid event photography capturing reactions, conversations, and session activities without stiff corporate poses': Demonstrates directed studio posing, staged product arrangements, and behind-the-scenes documentary-style capture.",
+            "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Candid event photography capturing reactions, conversations, and session activities without stiff corporate poses': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+            "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Full team group photograph of around 120 people': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+            "Demonstrated 'composition_technique' (high confidence, must_have) directly matches requirement 'Full team group photograph of around 120 people': Employs varied compositional choices including extreme low-angle perspective between tall buildings, centered symmetrica",
+            "Demonstrated 'subject_domain' (high confidence, nice_to_have) directly matches requirement 'Quick corporate headshots for 10-15 leadership team members': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+            "Demonstrated 'shooting_context_style' (high confidence, nice_to_have) directly matches requirement 'Quick corporate headshots for 10-15 leadership team members': Demonstrates directed studio posing, staged product arrangements, and behind-the-scenes documentary-style capture."
           ],
           "trade_offs": [
-            "No demonstrated portfolio evidence for 'composition_technique' (must_have) matching requirement 'Proper full-team group photograph of all participants'"
+            "No critical capability gaps identified from available evidence."
           ],
           "assumptions": [
-            "Assumes artist availability and scheduling fit for 4 September, approximately 10:00 AM to 3:00 PM [HARD LIMIT]",
-            "Assumes artist availability and scheduling fit for South Delhi (venue TBD) [HARD LIMIT]",
-            "Assumes artist can accommodate operational requirement: guest_count (110 to 130 attendees)",
-            "Assumes artist can accommodate operational requirement: turnaround_time (8 to 10 photos delivered same evening for LinkedIn; full set delivered later that week) [HARD LIMIT]",
-            "Assumes artist standard fee can align with requested budget: No fixed budget provided; requires sensible options for procurement",
-            "Assumes artist can accommodate operational requirement: equipment (Venue lighting conditions and flash permission currently unknown)"
+            "Assumes artist availability and scheduling fit for 4 Sept, 10am-3pm [HARD LIMIT]",
+            "Assumes artist availability and scheduling fit for South Delhi [HARD LIMIT]",
+            "Assumes artist can accommodate operational requirement: guest_count (110-130 attendees (around 120 people))",
+            "Assumes artist can accommodate operational requirement: turnaround_time (8-10 photos delivered the same evening for LinkedIn, remaining photos later that week) [HARD LIMIT]",
+            "Assumes artist standard fee can align with requested budget: No fixed budget shared; needs sensible options for procurement review"
           ],
           "uncertainty": [
-            "Capability 'composition_technique' is unverified in portfolio (status: insufficient_evidence)",
-            "Operational constraint 'date_availability' (4 September, approximately 10:00 AM to 3:00 PM) requires manual verification with artist",
-            "Operational constraint 'location' (South Delhi (venue TBD)) requires manual verification with artist",
-            "Operational constraint 'guest_count' (110 to 130 attendees) requires manual verification with artist",
-            "Operational constraint 'turnaround_time' (8 to 10 photos delivered same evening for LinkedIn; full set delivered later that week) requires manual verification with artist",
-            "Operational constraint 'budget' (No fixed budget provided; requires sensible options for procurement) requires manual verification with artist",
-            "Operational constraint 'equipment' (Venue lighting conditions and flash permission currently unknown) requires manual verification with artist"
+            "Operational constraint 'date_availability' (4 Sept, 10am-3pm) requires manual verification with artist",
+            "Operational constraint 'location' (South Delhi) requires manual verification with artist",
+            "Operational constraint 'guest_count' (110-130 attendees (around 120 people)) requires manual verification with artist",
+            "Operational constraint 'turnaround_time' (8-10 photos delivered the same evening for LinkedIn, remaining photos later that week) requires manual verification with artist",
+            "Operational constraint 'budget' (No fixed budget shared; needs sensible options for procurement review) requires manual verification with artist"
           ],
           "operational_constraint_notes": [
-            "date_availability: 4 September, approximately 10:00 AM to 3:00 PM [HARD LIMIT] — verify with artist",
-            "location: South Delhi (venue TBD) [HARD LIMIT] — verify with artist",
-            "guest_count: 110 to 130 attendees — verify with artist",
-            "turnaround_time: 8 to 10 photos delivered same evening for LinkedIn; full set delivered later that week [HARD LIMIT] — verify with artist",
-            "budget: No fixed budget provided; requires sensible options for procurement — verify with artist",
-            "equipment: Venue lighting conditions and flash permission currently unknown — verify with artist"
+            "date_availability: 4 Sept, 10am-3pm [HARD LIMIT] — verify with artist",
+            "location: South Delhi [HARD LIMIT] — verify with artist",
+            "guest_count: 110-130 attendees (around 120 people) — verify with artist",
+            "turnaround_time: 8-10 photos delivered the same evening for LinkedIn, remaining photos later that week [HARD LIMIT] — verify with artist",
+            "budget: No fixed budget shared; needs sensible options for procurement review — verify with artist"
           ],
           "rank": 2
         }
       ],
       "reasons": [
-        "Demonstrated 'shooting_context_style' (low confidence, must_have) directly matches requirement 'Candid event coverage capturing natural interactions, exercises, and reactions during sessions and lunch, avoiding stiff conference style'",
-        "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Candid event coverage capturing natural interactions, exercises, and reactions during sessions and lunch, avoiding stiff conference style'",
-        "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Proper full-team group photograph of all participants'",
-        "Demonstrated 'subject_domain' (low confidence, nice_to_have) directly matches requirement 'Quick headshots for 10 to 15 leadership team members'",
-        "Demonstrated 'shooting_context_style' (low confidence, must_have) directly matches requirement 'Candid event coverage capturing natural interactions, exercises, and reactions during sessions and lunch, avoiding stiff conference style'",
-        "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Candid event coverage capturing natural interactions, exercises, and reactions during sessions and lunch, avoiding stiff conference style'",
-        "Demonstrated 'subject_domain' (low confidence, must_have) directly matches requirement 'Proper full-team group photograph of all participants'",
-        "Demonstrated 'subject_domain' (low confidence, nice_to_have) directly matches requirement 'Quick headshots for 10 to 15 leadership team members'"
+        "Demonstrated 'shooting_context_style' (high confidence, must_have) directly matches requirement 'Candid event photography capturing reactions, conversations, and session activities without stiff corporate poses': Applies a candid, documentary-style approach capturing live stage performances, audience reactions, and spontaneous stre",
+        "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Candid event photography capturing reactions, conversations, and session activities without stiff corporate poses': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+        "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Full team group photograph of around 120 people': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+        "Demonstrated 'composition_technique' (high confidence, must_have) directly matches requirement 'Full team group photograph of around 120 people': Demonstrates varied framing techniques including centered portrait subjects, wide-angle stage shots utilizing leading ca",
+        "Demonstrated 'subject_domain' (high confidence, nice_to_have) directly matches requirement 'Quick corporate headshots for 10-15 leadership team members': Depicts live musical performances, large-scale stadium/concert events with crowds and stage lights, interior and exterio",
+        "Demonstrated 'shooting_context_style' (high confidence, nice_to_have) directly matches requirement 'Quick corporate headshots for 10-15 leadership team members': Applies a candid, documentary-style approach capturing live stage performances, audience reactions, and spontaneous stre",
+        "Demonstrated 'shooting_context_style' (high confidence, must_have) directly matches requirement 'Candid event photography capturing reactions, conversations, and session activities without stiff corporate poses': Demonstrates directed studio posing, staged product arrangements, and behind-the-scenes documentary-style capture.",
+        "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Candid event photography capturing reactions, conversations, and session activities without stiff corporate poses': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+        "Demonstrated 'subject_domain' (high confidence, must_have) directly matches requirement 'Full team group photograph of around 120 people': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+        "Demonstrated 'composition_technique' (high confidence, must_have) directly matches requirement 'Full team group photograph of around 120 people': Employs varied compositional choices including extreme low-angle perspective between tall buildings, centered symmetrica",
+        "Demonstrated 'subject_domain' (high confidence, nice_to_have) directly matches requirement 'Quick corporate headshots for 10-15 leadership team members': Demonstrates experience in fashion portraits, model photography, and commercial product/cosmetic photography.",
+        "Demonstrated 'shooting_context_style' (high confidence, nice_to_have) directly matches requirement 'Quick corporate headshots for 10-15 leadership team members': Demonstrates directed studio posing, staged product arrangements, and behind-the-scenes documentary-style capture."
       ],
       "trade_offs": [
-        "No demonstrated portfolio evidence for 'composition_technique' (must_have) matching requirement 'Proper full-team group photograph of all participants'"
+        "No critical capability gaps identified from available evidence."
       ],
       "assumptions": [
-        "Assumes artist availability and scheduling fit for 4 September, approximately 10:00 AM to 3:00 PM [HARD LIMIT]",
-        "Assumes artist availability and scheduling fit for South Delhi (venue TBD) [HARD LIMIT]",
-        "Assumes artist can accommodate operational requirement: guest_count (110 to 130 attendees)",
-        "Assumes artist can accommodate operational requirement: turnaround_time (8 to 10 photos delivered same evening for LinkedIn; full set delivered later that week) [HARD LIMIT]",
-        "Assumes artist standard fee can align with requested budget: No fixed budget provided; requires sensible options for procurement",
-        "Assumes artist can accommodate operational requirement: equipment (Venue lighting conditions and flash permission currently unknown)"
+        "Assumes artist availability and scheduling fit for 4 Sept, 10am-3pm [HARD LIMIT]",
+        "Assumes artist availability and scheduling fit for South Delhi [HARD LIMIT]",
+        "Assumes artist can accommodate operational requirement: guest_count (110-130 attendees (around 120 people))",
+        "Assumes artist can accommodate operational requirement: turnaround_time (8-10 photos delivered the same evening for LinkedIn, remaining photos later that week) [HARD LIMIT]",
+        "Assumes artist standard fee can align with requested budget: No fixed budget shared; needs sensible options for procurement review"
       ],
       "uncertainty": [
-        "Capability 'composition_technique' is unverified in portfolio (status: insufficient_evidence)",
-        "Operational constraint 'date_availability' (4 September, approximately 10:00 AM to 3:00 PM) requires manual verification with artist",
-        "Operational constraint 'location' (South Delhi (venue TBD)) requires manual verification with artist",
-        "Operational constraint 'guest_count' (110 to 130 attendees) requires manual verification with artist",
-        "Operational constraint 'turnaround_time' (8 to 10 photos delivered same evening for LinkedIn; full set delivered later that week) requires manual verification with artist",
-        "Operational constraint 'budget' (No fixed budget provided; requires sensible options for procurement) requires manual verification with artist",
-        "Operational constraint 'equipment' (Venue lighting conditions and flash permission currently unknown) requires manual verification with artist"
+        "Operational constraint 'date_availability' (4 Sept, 10am-3pm) requires manual verification with artist",
+        "Operational constraint 'location' (South Delhi) requires manual verification with artist",
+        "Operational constraint 'guest_count' (110-130 attendees (around 120 people)) requires manual verification with artist",
+        "Operational constraint 'turnaround_time' (8-10 photos delivered the same evening for LinkedIn, remaining photos later that week) requires manual verification with artist",
+        "Operational constraint 'budget' (No fixed budget shared; needs sensible options for procurement review) requires manual verification with artist"
       ],
       "improve_your_matches": {
         "section_title": "Improve your matches",
@@ -1023,22 +1055,22 @@
         "refinement_questions": [
           {
             "question": "Will there be a dedicated setup area and time window for the 10-15 executive headshots, or must they be taken informally during breaks?",
-            "expected_impact": "If a formal setup is allocated, photographers with demonstrated portrait lighting capability will gain priority over pure candid coverage."
+            "expected_impact": "Clarifies whether executive portrait capability should be emphasized over candid event coverage; any ranking change must come from the corresponding demonstrated capability dimensions."
           },
           {
             "question": "Are external flash units and speedlights permitted inside the event rooms during presentations?",
-            "expected_impact": "Determines whether low-light natural ambient competence or off-camera flash lighting control is prioritized."
+            "expected_impact": "Clarifies the lighting conditions the photographer must handle; ranking can change only through existing demonstrated lighting capability dimensions supported by evidence."
           }
         ]
       },
       "refinement_questions": [
         {
           "question": "Will there be a dedicated setup area and time window for the 10-15 executive headshots, or must they be taken informally during breaks?",
-          "expected_impact": "If a formal setup is allocated, photographers with demonstrated portrait lighting capability will gain priority over pure candid coverage."
+          "expected_impact": "Clarifies whether executive portrait capability should be emphasized over candid event coverage; any ranking change must come from the corresponding demonstrated capability dimensions."
         },
         {
           "question": "Are external flash units and speedlights permitted inside the event rooms during presentations?",
-          "expected_impact": "Determines whether low-light natural ambient competence or off-camera flash lighting control is prioritized."
+          "expected_impact": "Clarifies the lighting conditions the photographer must handle; ranking can change only through existing demonstrated lighting capability dimensions supported by evidence."
         }
       ]
     }

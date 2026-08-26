@@ -233,12 +233,13 @@ def generate_refinement_questions(parsed_brief):
         return [
             {
                 "question": "Do you have an in-house PA/speakers and mic available for live music, or should the artist bring complete sound equipment?",
-                "expected_impact": "Clarifies equipment constraints. If the cafe has no usable PA, solo artists with self-contained amplification will rank higher.",
-            },
+                "expected_impact": "If self-amplification is required, this adds an equipment-fit"
+                "constraint that must be verified separately; it does not alter"
+                "capability scores unless a corresponding demonstrated capability"
+                "dimension is present.",            },
             {
                 "question": "Would you prefer primarily Hindi acoustic vocals, English covers, or a balanced bilingual set for background dining?",
-                "expected_impact": "Refines style matching against artists with demonstrated vocal repertoire in the preferred language.",
-            },
+                "expected_impact": "The answer clarifies the desired repertoire/style context and can affect ranking only where the selected preference maps to an existing scored capability dimension.",            },
         ]
 
     # 2. Skincare photography / H082
@@ -246,12 +247,10 @@ def generate_refinement_questions(parsed_brief):
         return [
             {
                 "question": "Will a model definitely be present for hand/interaction shots, or is this strictly tabletop product-only arrangements?",
-                "expected_impact": "If human model interaction is confirmed, photographers with demonstrated talent direction and portraiture will rank higher.",
-            },
+                "expected_impact": "If human interaction shots are required, the relevant demonstrated portrait or talent-direction dimensions become more important where those dimensions are part of the scored capability vocabulary.",            },
             {
                 "question": "Do you need the photographer to provide backdrops and specialized tabletop lighting props, or will your team supply all staging materials?",
-                "expected_impact": "Filters for photographers with proven standalone tabletop studio lighting technical control.",
-            },
+                "expected_impact": "Clarifies whether equipment provision is an operational responsibility or a demonstrated capability requirement; equipment logistics are not treated as demonstrated skill without supporting evidence.",            },
         ]
 
     # 3. Vertical video / H083
@@ -259,12 +258,10 @@ def generate_refinement_questions(parsed_brief):
         return [
             {
                 "question": "Do you require the editor to source and clear commercially licensed background music, or will you supply approved tracks?",
-                "expected_impact": "Favors video editors with demonstrated commercial audio curation and licensing experience.",
-            },
+                "expected_impact": "Clarifies whether music licensing is an artist responsibility; licensing responsibility is operational unless it maps to an existing demonstrated capability dimension.",            },
             {
                 "question": "Are styled kinetic subtitles / animated text overlays required, or standard clean subtitle captions?",
-                "expected_impact": "Distinguishes editors with motion graphics and advanced dialogue typography capabilities.",
-            },
+                "expected_impact": "If kinetic text is required, editors with demonstrated motion-graphics or text-animation capability become more relevant where those dimensions are part of the scored capability vocabulary.",            },
         ]
 
     # 4. Leadership event photos / H117
@@ -272,11 +269,11 @@ def generate_refinement_questions(parsed_brief):
         return [
             {
                 "question": "Will there be a dedicated setup area and time window for the 10-15 executive headshots, or must they be taken informally during breaks?",
-                "expected_impact": "If a formal setup is allocated, photographers with demonstrated portrait lighting capability will gain priority over pure candid coverage.",
+                "expected_impact": "Clarifies whether executive portrait capability should be emphasized over candid event coverage; any ranking change must come from the corresponding demonstrated capability dimensions.",
             },
             {
                 "question": "Are external flash units and speedlights permitted inside the event rooms during presentations?",
-                "expected_impact": "Determines whether low-light natural ambient competence or off-camera flash lighting control is prioritized.",
+                "expected_impact": "Clarifies the lighting conditions the photographer must handle; ranking can change only through existing demonstrated lighting capability dimensions supported by evidence.",
             },
         ]
 
