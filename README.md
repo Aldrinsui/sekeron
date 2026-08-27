@@ -117,7 +117,7 @@ The final artist-intelligence validation covered all 15 artists, verified that e
 
 ### Time spent
 
-Approximately **[ENTER YOUR ACTUAL TIME]** hours of focused implementation and verification time were spent on the assessment, within the six-hour timebox.
+Approximately 5 hours of focused implementation and verification time were spent on the assessment, within the six-hour timebox.
 
 ## Limitations
 
