@@ -34,5 +34,6 @@ No frontend, web scraping, model training, deployment, identity inference or tru
 - Confidence reflects evidence strength; insufficient evidence receives zero points and no negative penalty.
 - Operational constraints such as budget, date and equipment are surfaced for human verification but are not algorithmically scored.
 - Hirer briefs can contain ambiguity or unknowns; recommendations are therefore provisional.
+- Each requirement receives one bounded contribution after aggregating its mapped dimensions, so requirement fan-out does not by itself multiply a requirement's influence.
 - Gemini is used for structured brief parsing and artist intelligence; ranking remains deterministic and reproducible.
 - Additional observed capabilities may be recorded when directly supported by supplied media, but they remain supplementary to the standard category dimensions.
