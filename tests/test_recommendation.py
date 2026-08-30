@@ -331,3 +331,106 @@ def test_contextual_fields_and_refinement_questions_direct():
     assert improve["section_title"] == "Improve your matches"
     assert len(improve["refinement_questions"]) <= 2
 
+
+def test_multi_dimension_requirement_does_not_inflate_score():
+    """Regression test for a real bug found in audit (2026-08-25): a
+    requirement mapped to N dimensions must NOT contribute up to N times
+    the points of an equivalent single-dimension requirement. Contribution
+    is averaged across mapped_dimensions, not summed."""
+    artist = {
+        "artist_id": "M99",
+        "category": "musician",
+        "demonstrated_capabilities": [
+            {"capability": "performance_format", "status": "demonstrated", "confidence": "high"},
+            {"capability": "live_vs_studio_context", "status": "demonstrated", "confidence": "high"},
+            {"capability": "audio_arrangement_characteristics", "status": "demonstrated", "confidence": "high"},
+            {"capability": "genre_style_signal", "status": "demonstrated", "confidence": "high"},
+        ],
+    }
+
+    single_dim_brief = {
+        "artist_category": "musician",
+        "capability_requirements": [
+            {"requirement_text": "R", "mapped_dimensions": ["genre_style_signal"], "importance": "must_have"}
+        ],
+    }
+    multi_dim_brief = {
+        "artist_category": "musician",
+        "capability_requirements": [
+            {
+                "requirement_text": "R",
+                "mapped_dimensions": ["performance_format", "live_vs_studio_context", "audio_arrangement_characteristics"],
+                "importance": "must_have",
+            }
+        ],
+    }
+
+    single_result = score_artist(single_dim_brief, artist)
+    multi_result = score_artist(multi_dim_brief, artist)
+
+    # Both requirements are must_have, all cited dimensions are demonstrated+high
+    # for this artist. A 3-dimension requirement must contribute the SAME
+    # maximum as a 1-dimension requirement (3.0 = high weight * must_have
+    # multiplier), not 3x that (9.0), which was the bug.
+    assert single_result["total_score"] == 3.0
+    assert multi_result["total_score"] == 3.0
+    assert multi_result["total_score"] == single_result["total_score"]
+
+    # The full per-requirement audit trail must be visible and non-lossy.
+    rb = multi_result["requirement_breakdown"][0]
+    assert rb["mapped_dimensions"] == ["performance_format", "live_vs_studio_context", "audio_arrangement_characteristics"]
+    assert rb["requirement_contribution"] == 3.0
+    assert set(rb["per_dimension"].keys()) == {"performance_format", "live_vs_studio_context", "audio_arrangement_characteristics"}
+
+
+def test_score_breakdown_does_not_silently_overwrite_shared_dimension():
+    """Regression test for a related bug: if two DIFFERENT requirements map
+    to the same dimension, the flat score_breakdown dict can only show one
+    entry per dimension key (a real, acknowledged limitation of that flat
+    shape) - but requirement_breakdown must show BOTH requirements' full
+    contribution, never silently dropping one."""
+    artist = {
+        "artist_id": "M99",
+        "category": "musician",
+        "demonstrated_capabilities": [
+            {"capability": "performance_format", "status": "demonstrated", "confidence": "medium"},
+        ],
+    }
+    parsed_brief = {
+        "artist_category": "musician",
+        "capability_requirements": [
+            {"requirement_text": "R1", "mapped_dimensions": ["performance_format"], "importance": "must_have"},
+            {"requirement_text": "R2", "mapped_dimensions": ["performance_format"], "importance": "nice_to_have"},
+        ],
+    }
+    result = score_artist(parsed_brief, artist)
+
+    # R1: medium(2) * must_have(1.0) = 2.0 ; R2: medium(2) * nice_to_have(0.5) = 1.0
+    assert result["total_score"] == 3.0
+    assert len(result["requirement_breakdown"]) == 2
+    assert result["requirement_breakdown"][0]["requirement_contribution"] == 2.0
+    assert result["requirement_breakdown"][1]["requirement_contribution"] == 1.0
+
+
+def test_capability_vocabulary_is_single_source_of_truth():
+    """Regression test for the actual bug found in audit (2026-08-25):
+    generate_artist_intelligence.py had its own stale, locally-duplicated
+    copy of CATEGORY_DIMENSIONS instead of importing capability_vocabulary.py,
+    silently defeating the module's whole single-source-of-truth purpose.
+    This test fails loudly if that ever regresses, in either file."""
+    import importlib
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+    import capability_vocabulary as cv
+    import generate_artist_intelligence as gai
+    importlib.reload(gai)
+
+    assert gai.CATEGORY_DIMENSIONS is cv.CATEGORY_DIMENSIONS, (
+        "generate_artist_intelligence.py must import CATEGORY_DIMENSIONS from "
+        "capability_vocabulary.py, not define its own copy."
+    )
+    assert gai.STATUS_LEVELS == cv.STATUS_LEVELS
+    assert "conflicting_evidence" not in gai.STATUS_LEVELS, (
+        "status must remain evidence-derived only (demonstrated/insufficient_evidence); "
+        "profile conflicts are surfaced via the separate profile_conflict boolean flag, "
+        "never by overwriting status."
+    )

@@ -75,6 +75,18 @@ except ImportError:
     sys.exit(1)
 
 # --------------------------------------------------------------------------
+# Shared capability vocabulary - single source of truth. Do NOT redefine
+# CATEGORY_DIMENSIONS/STATUS_LEVELS/etc. locally; import them, or this file
+# silently drifts out of sync with capability_vocabulary.py (this exact bug
+# was found and fixed on 2026-08-25 - see AI_USAGE.md / audit notes).
+# --------------------------------------------------------------------------
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from capability_vocabulary import (  # noqa: E402
+    CONFIDENCE_LEVELS, STATUS_LEVELS, CLAIM_RELATIONSHIPS,
+    EXPECTED_ARTIST_COUNT, CATEGORY_DIMENSIONS,
+)
+
+# --------------------------------------------------------------------------
 # CONFIG / THRESHOLDS - documented here, nowhere else.
 # --------------------------------------------------------------------------
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
@@ -88,67 +100,6 @@ IMAGE_CONTEXT_BUDGET_PER_ARTIST = 20   # max images/frames attached; P03's 21 im
 AHASH_SIZE = 8                          # 8x8 -> 64-bit perceptual hash, using Pillow only (no new dependency)
 AHASH_NEAR_DUP_HAMMING_THRESHOLD = 5    # bits differing; below this, treated as visually near-duplicate
 AUDIO_CONTEXT_SECONDS_BUDGET_PER_ARTIST = 480.0  # 8 min; generous safety cap, not expected to bind on this dataset
-
-CONFIDENCE_LEVELS = ["insufficient", "low", "medium", "high"]
-STATUS_LEVELS = ["demonstrated", "insufficient_evidence", "conflicting_evidence"]
-CLAIM_RELATIONSHIPS = ["supported", "unsupported_no_evidence", "contradicted"]
-
-EXPECTED_ARTIST_COUNT = 15
-
-# --------------------------------------------------------------------------
-# Category-specific dimension checklists.
-# Every artist in a category is assessed against every dimension in their
-# checklist - the model cannot skip one; skipped dimensions become an
-# explicit insufficient_evidence record via code-side completeness checking.
-# --------------------------------------------------------------------------
-CATEGORY_DIMENSIONS = {
-    "photographer": [
-        {"capability": "subject_domain", "dimension_group": "subject",
-         "guidance": "What kind of subject matter is depicted (portrait, candid, event, landscape, product, etc.)?"},
-        {"capability": "composition_technique", "dimension_group": "composition",
-         "guidance": "Framing, balance, use of space, rule-of-thirds/symmetry or deliberate departures from it."},
-        {"capability": "lighting_treatment", "dimension_group": "lighting",
-         "guidance": "Natural vs. studio light, low-light handling, directionality, hard vs. soft light."},
-        {"capability": "color_tone_treatment", "dimension_group": "color",
-         "guidance": "Color grading style, black-and-white vs. color, saturation/contrast choices."},
-        {"capability": "environment_context", "dimension_group": "environment",
-         "guidance": "Indoor/outdoor/studio/urban/natural setting as depicted."},
-        {"capability": "technical_control_indicators", "dimension_group": "technical",
-         "guidance": "Visible outcomes only - focus/depth-of-field control, sharpness, motion blur. Do NOT infer camera settings not visible in the image."},
-        {"capability": "shooting_context_style", "dimension_group": "style",
-         "guidance": "Candid vs. posed, single-subject vs. group, documentary vs. directed."},
-    ],
-    "musician": [
-        {"capability": "vocal_or_instrumental_role", "dimension_group": "role",
-         "guidance": "Is a voice present? An instrument? Which, if identifiable from audio/visual evidence?"},
-        {"capability": "genre_style_signal", "dimension_group": "style",
-         "guidance": "Audible style signals only - frame as observed signals, not an authoritative genre label."},
-        {"capability": "performance_format", "dimension_group": "format",
-         "guidance": "Solo vs. ensemble, based on audible voices/instruments or visible performers."},
-        {"capability": "live_vs_studio_context", "dimension_group": "context",
-         "guidance": "Crowd noise, stage lighting, room acoustics vs. a clean studio-style recording."},
-        {"capability": "instrumental_technical_signals", "dimension_group": "technical",
-         "guidance": "Only if visually evidenced - e.g. hand position on an instrument, visible technique."},
-        {"capability": "audio_arrangement_characteristics", "dimension_group": "arrangement",
-         "guidance": "Layering, dynamics, tempo changes actually audible in the supplied segment(s)."},
-    ],
-    "video_editor": [
-        {"capability": "pacing_rhythm", "dimension_group": "pacing",
-         "guidance": "Judge from the actual visual content and variety across sampled frames of a clip - not from scene-cut counts alone, which are structural metadata, not proof by themselves."},
-        {"capability": "shot_composition_and_framing", "dimension_group": "composition",
-         "guidance": "Framing quality/style across sampled frames."},
-        {"capability": "visual_sequencing_signals", "dimension_group": "sequencing",
-         "guidance": "Do frames from the same clip suggest coherent narrative flow vs. abrupt jump cuts?"},
-        {"capability": "color_treatment", "dimension_group": "color",
-         "guidance": "Grading/tone consistency or style visible across frames."},
-        {"capability": "content_format_context", "dimension_group": "format",
-         "guidance": "What kind of content is this (event coverage, vlog, performance capture, interview, etc.)?"},
-        {"capability": "motion_graphics_or_overlay_evidence", "dimension_group": "graphics",
-         "guidance": "Only if text overlays/graphics/titles are actually visible in a sampled frame."},
-        {"capability": "audio_dialogue_handling", "dimension_group": "audio",
-         "guidance": "Based on the one representative audio sample per clip. Comment on clarity, mix, presence of dialogue/music/ambient sound - do not speculate about full-clip editing choices beyond what this sample supports."},
-    ],
-}
 
 
 # --------------------------------------------------------------------------
@@ -361,7 +312,7 @@ RULES (follow exactly):
 1. Assess EVERY dimension listed below. If evidence does not support a dimension, set status="insufficient_evidence", confidence="insufficient", evidence_references=[], and explain why in unknowns_limitations. Do NOT invent a capability.
 1a. You may report up to two additional_observed_capabilities only when a useful capability is directly observable in the supplied evidence and is not adequately represented by the standard dimensions above. These are supplementary observations, not replacements for standard dimensions. Do not infer them from profile claims alone. Use concise, evidence-grounded capability names.
 2. A capability may only be "demonstrated" if you can point to specific evidence_id(s) you were actually shown below, and your observation must describe what is actually visible/audible in that evidence - not what the profile claims, and not the fact that it was "selected" (selection is not proof).
-3. If evidence for a dimension conflicts with itself or is genuinely ambiguous, you may still use status="demonstrated" with confidence="low" and explain the ambiguity - only use "conflicting_evidence" status for the claim_evaluations conflict case below, not for internal evidence ambiguity.
+3. If evidence for a dimension conflicts with itself or is genuinely ambiguous, you may still use status="demonstrated" with confidence="low" and explain the ambiguity. Capability status reflects EVIDENCE ONLY - never set it based on whether a profile claim agrees with it (that relationship is handled separately in claim_evaluations below).
 4. confidence must reflect the AMOUNT and CLARITY of evidence, not your confidence in your own reasoning.
 5. Evidence marked as "cross-artist duplicate" or "flagged anomaly" in its label can still be described, but should generally not support "high" confidence alone.
 6. Never infer reliability, punctuality, professionalism, popularity, character, trustworthiness, socioeconomic status, identity, or authorship/ownership from filenames. Never attempt to identify or reverse-search any person shown.
@@ -484,7 +435,7 @@ def clamp_capability(cap, shown_evidence_by_id, warnings, artist_id):
             warnings.append(f"{artist_id}/{cap.get('capability')}: dropped citation to unshown/unknown evidence_id '{eid}'")
     cap["evidence_references"] = valid_refs
 
-    if cap["status"] in ("demonstrated", "conflicting_evidence") and not valid_refs:
+    if cap["status"] == "demonstrated" and not valid_refs:
         warnings.append(f"{artist_id}/{cap.get('capability')}: no valid evidence after resolution - downgraded to insufficient_evidence")
         cap["status"] = "insufficient_evidence"
         cap["confidence"] = "insufficient"
@@ -518,6 +469,7 @@ def clamp_capability(cap, shown_evidence_by_id, warnings, artist_id):
          "locator": r.get("locator"), "note": r.get("note", "")}
         for r in valid_refs
     ]
+    cap.setdefault("profile_conflict", False)
     return cap
 
 
@@ -533,6 +485,7 @@ def build_completeness_fill(dimension, artist_id):
         "related_profile_claim_ids": [],
         "unknowns_limitations": ["Model response did not address this dimension; auto-filled as insufficient_evidence for completeness."],
         "is_standard_checklist_dimension": True,
+        "profile_conflict": False,
     }
 
 
@@ -728,7 +681,7 @@ def main():
                     "resolution": "unresolved_both_retained",
                 })
                 if related_cap_key in caps_by_capability:
-                    caps_by_capability[related_cap_key]["status"] = "conflicting_evidence"
+                    caps_by_capability[related_cap_key]["profile_conflict"] = True
 
         for cap in demonstrated_capabilities + additional_caps:
             cap.setdefault("related_profile_claim_ids", [])
@@ -801,7 +754,7 @@ def main():
             validation["every_dimension_covered"]["passed"] = False
             validation["every_dimension_covered"]["details"].append(f"{r['artist_id']}: missing {expected_dims - present_dims}")
         for c in r["demonstrated_capabilities"]:
-            if c["status"] in ("demonstrated", "conflicting_evidence") and not c["evidence_references"]:
+            if c["status"] == "demonstrated" and not c["evidence_references"]:
                 validation["every_demonstrated_capability_has_evidence"]["passed"] = False
                 validation["every_demonstrated_capability_has_evidence"]["details"].append(
                     f"{r['artist_id']}/{c['capability']}: status={c['status']} but no evidence_references"

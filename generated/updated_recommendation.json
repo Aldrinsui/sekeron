@@ -1,5 +1,5 @@
 {
-  "generated_by": "scripts/update_recommendation.py",
+  "generated_by": "scripts/update_recommendation.py (rescored with fixed recommendation_scoring.py, 2026-08-25)",
   "hirer_id": "H081",
   "original_source": "01_cafe_music_whatsapp.txt",
   "update_source": "01_cafe_music_update.txt",
@@ -13,18 +13,18 @@
     },
     "is_genuine_rerank": false,
     "old_top_two_scores": {
-      "M04": 15.0,
-      "M05": 15.0
+      "M04": 7.5,
+      "M05": 7.5
     },
     "new_top_two_scores": {
-      "M04": 12.0,
-      "M05": 11.0
+      "M04": 6.0,
+      "M05": 5.5
     },
     "old_score_gap": 0.0,
-    "new_score_gap": 1.0,
+    "new_score_gap": 0.5,
     "score_gap_changed": true,
     "new_tie": false,
-    "notes": "Ranking order remained unchanged, but the score gap changed from 0.00 to 1.00 points."
+    "notes": "Ranking order remained unchanged, but the score gap changed from 0.00 to 0.50 points."
   },
   "updated_requirements": {
     "hirer_id": "H081",
@@ -79,33 +79,87 @@
     {
       "artist_id": "M04",
       "display_name": "KillRush",
-      "total_score": 12.0,
+      "total_score": 6.0,
       "score_breakdown": {
         "performance_format": {
           "status": "demonstrated",
           "confidence": "high",
           "importance": "must_have",
+          "raw_weight": 3,
           "points": 3.0
         },
         "live_vs_studio_context": {
           "status": "demonstrated",
           "confidence": "high",
           "importance": "must_have",
+          "raw_weight": 3,
           "points": 3.0
         },
         "instrumental_technical_signals": {
           "status": "demonstrated",
           "confidence": "high",
           "importance": "must_have",
+          "raw_weight": 3,
           "points": 3.0
         },
         "genre_style_signal": {
           "status": "demonstrated",
           "confidence": "high",
           "importance": "must_have",
+          "raw_weight": 3,
           "points": 3.0
         }
       },
+      "requirement_breakdown": [
+        {
+          "requirement_index": 0,
+          "requirement_text": "Perform a 45-minute headline set that feels like a central performance moment",
+          "importance": "must_have",
+          "mapped_dimensions": [
+            "performance_format",
+            "live_vs_studio_context"
+          ],
+          "per_dimension": {
+            "performance_format": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "raw_weight": 3
+            },
+            "live_vs_studio_context": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "raw_weight": 3
+            }
+          },
+          "requirement_contribution": 3.0
+        },
+        {
+          "requirement_index": 1,
+          "requirement_text": "Acoustic musical style and performance",
+          "importance": "must_have",
+          "mapped_dimensions": [
+            "instrumental_technical_signals",
+            "genre_style_signal"
+          ],
+          "per_dimension": {
+            "instrumental_technical_signals": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "raw_weight": 3
+            },
+            "genre_style_signal": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "raw_weight": 3
+            }
+          },
+          "requirement_contribution": 3.0
+        }
+      ],
       "reasons": [
         "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Performances demonstrate dynamic group setups including acoustic duos (vocal and acoustic guitar), acoustic trios (vocal",
         "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Recorded evidence captures live rehearsal contexts, indoor practice room settings, and an outdoor balcony recording sess",
@@ -138,33 +192,87 @@
     {
       "artist_id": "M05",
       "display_name": "Lunar Noise",
-      "total_score": 11.0,
+      "total_score": 5.5,
       "score_breakdown": {
         "performance_format": {
           "status": "demonstrated",
           "confidence": "high",
           "importance": "must_have",
+          "raw_weight": 3,
           "points": 3.0
         },
         "live_vs_studio_context": {
           "status": "demonstrated",
           "confidence": "high",
           "importance": "must_have",
+          "raw_weight": 3,
           "points": 3.0
         },
         "instrumental_technical_signals": {
           "status": "demonstrated",
           "confidence": "medium",
           "importance": "must_have",
+          "raw_weight": 2,
           "points": 2.0
         },
         "genre_style_signal": {
           "status": "demonstrated",
           "confidence": "high",
           "importance": "must_have",
+          "raw_weight": 3,
           "points": 3.0
         }
       },
+      "requirement_breakdown": [
+        {
+          "requirement_index": 0,
+          "requirement_text": "Perform a 45-minute headline set that feels like a central performance moment",
+          "importance": "must_have",
+          "mapped_dimensions": [
+            "performance_format",
+            "live_vs_studio_context"
+          ],
+          "per_dimension": {
+            "performance_format": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "raw_weight": 3
+            },
+            "live_vs_studio_context": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "raw_weight": 3
+            }
+          },
+          "requirement_contribution": 3.0
+        },
+        {
+          "requirement_index": 1,
+          "requirement_text": "Acoustic musical style and performance",
+          "importance": "must_have",
+          "mapped_dimensions": [
+            "instrumental_technical_signals",
+            "genre_style_signal"
+          ],
+          "per_dimension": {
+            "instrumental_technical_signals": {
+              "status": "demonstrated",
+              "confidence": "medium",
+              "importance": "must_have",
+              "raw_weight": 2
+            },
+            "genre_style_signal": {
+              "status": "demonstrated",
+              "confidence": "high",
+              "importance": "must_have",
+              "raw_weight": 3
+            }
+          },
+          "requirement_contribution": 2.5
+        }
+      ],
       "reasons": [
         "Demonstrated 'performance_format' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Solo performance format featuring a single lead vocalist accompanying himself on acoustic guitar.",
         "Demonstrated 'live_vs_studio_context' (high confidence, must_have) directly matches requirement 'Perform a 45-minute headline set that feels like a central performance moment': Recorded in casual indoor home/room settings with natural room acoustics and residential background visual elements rath",

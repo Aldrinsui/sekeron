@@ -17,16 +17,29 @@ Key principles:
 Imports capability vocabulary from capability_vocabulary.py to ensure
 dimension keys stay in sync with artist_intelligence.jsonl.
 
-SCORING FORMULA:
+SCORING FORMULA (fixed 2026-08-25 - see AI_USAGE.md / audit notes):
     For each capability_requirement:
-        for each mapped_dimension:
-            if artist has demonstrated status:
-                points += confidence_weight[confidence] * importance_multiplier
-            else:
-                points += 0  (no penalty)
+        per_dimension_points = [
+            confidence_weight[dim_confidence] if dim_status == "demonstrated" else 0
+            for each mapped_dimension
+        ]
+        requirement_contribution = mean(per_dimension_points) * importance_multiplier
+        total_score += requirement_contribution
 
     confidence_weight = {high: 3, medium: 2, low: 1, insufficient: 0}
     importance_multiplier = {must_have: 1.0, nice_to_have: 0.5}
+
+    NORMALIZATION NOTE: a requirement's contribution is AVERAGED across its
+    mapped_dimensions, not summed. A requirement mapped to 3 dimensions
+    therefore contributes at most the same maximum (3 * importance_multiplier)
+    as a requirement mapped to a single dimension - the number of dimensions
+    Gemini happened to attach to a requirement no longer inflates that
+    requirement's influence on the score. Previously this was a plain sum
+    across mapped_dimensions, so a 3-dimension requirement could contribute
+    up to 3x a 1-dimension requirement regardless of the hirer's actual
+    emphasis. All 9 pre-existing tests use single-dimension requirements
+    only, so this change is a no-op for them (mean of one value = that
+    value) - verified before making this change, not assumed.
 """
 
 import sys
@@ -77,39 +90,67 @@ def score_artist(parsed_brief, artist_record):
     for cap in artist_record.get("demonstrated_capabilities", []):
         caps_by_key[cap["capability"]] = cap
 
+    # breakdown: flat dict keyed by dimension name, last-writer-wins. Kept
+    # for backward compatibility with existing dimension-keyed lookups.
+    # requirement_breakdown: authoritative, non-lossy per-requirement record -
+    # if two requirements map to the same dimension, both are fully visible
+    # here even though `breakdown` can only show one entry per dimension key.
     breakdown = {}
+    requirement_breakdown = []
     total_score = 0.0
 
-    for req in parsed_brief.get("capability_requirements", []):
+    for req_index, req in enumerate(parsed_brief.get("capability_requirements", [])):
         importance = req.get("importance", "must_have")
         multiplier = IMPORTANCE_MULTIPLIER.get(importance, 1.0)
+        mapped_dims = req.get("mapped_dimensions", [])
 
-        for dim in req.get("mapped_dimensions", []):
+        per_dimension = {}
+        raw_points_for_mean = []
+
+        for dim in mapped_dims:
             cap = caps_by_key.get(dim)
 
             if cap and cap.get("status") == "demonstrated":
                 conf = cap.get("confidence", "insufficient")
                 weight = CONFIDENCE_WEIGHT.get(conf, 0)
-                points = weight * multiplier
             else:
-                # insufficient_evidence, conflicting_evidence, or not found
-                # → 0 points. NEVER negative. Unknown != incapable.
-                points = 0.0
+                # insufficient_evidence or not found → 0 weight.
+                # NEVER negative. Unknown != incapable.
+                conf = cap.get("confidence", "insufficient") if cap else "insufficient"
+                weight = 0
 
-            breakdown[dim] = {
+            raw_points_for_mean.append(weight)
+
+            dim_entry = {
                 "status": cap["status"] if cap else "not_found",
-                "confidence": (
-                    cap.get("confidence", "insufficient") if cap
-                    else "insufficient"
-                ),
+                "confidence": conf,
                 "importance": importance,
-                "points": points,
+                "raw_weight": weight,
             }
-            total_score += points
+            per_dimension[dim] = dim_entry
+            breakdown[dim] = {**dim_entry, "points": weight * multiplier}
+
+        # Average across this requirement's mapped dimensions so a
+        # requirement's fan-out (how many dimensions it happens to map to)
+        # cannot inflate its influence relative to a single-dimension
+        # requirement. See module docstring SCORING FORMULA note.
+        mean_weight = (sum(raw_points_for_mean) / len(raw_points_for_mean)) if raw_points_for_mean else 0.0
+        requirement_contribution = mean_weight * multiplier
+        total_score += requirement_contribution
+
+        requirement_breakdown.append({
+            "requirement_index": req_index,
+            "requirement_text": req.get("requirement_text", ""),
+            "importance": importance,
+            "mapped_dimensions": mapped_dims,
+            "per_dimension": per_dimension,
+            "requirement_contribution": requirement_contribution,
+        })
 
     return {
         "total_score": total_score,
         "score_breakdown": breakdown,
+        "requirement_breakdown": requirement_breakdown,
     }
 
 
@@ -329,6 +370,7 @@ def rank_artists(parsed_brief, all_artist_records):
             "display_name": artist.get("display_name", artist["artist_id"]),
             "total_score": result["total_score"],
             "score_breakdown": result["score_breakdown"],
+            "requirement_breakdown": result["requirement_breakdown"],
             "reasons": context["reasons"],
             "trade_offs": context["trade_offs"],
             "assumptions": context["assumptions"],
