@@ -21,6 +21,32 @@ Install dependencies:
 python3 -m pip install -r requirements.txt
 ```
 
+### Build the pipeline inputs
+
+The intelligence and recommendation stages below need three inputs that must be generated first, in this order, from the original read-only dataset:
+
+```bash
+python3 scripts/inspect_dataset.py \
+  --dataset-root "<DATASET_ROOT>" \
+  --output-dir generated
+```
+
+```bash
+python3 scripts/select_evidence.py \
+  --dataset-root "<DATASET_ROOT>" \
+  --manifest generated/dataset_manifest.json \
+  --output-dir generated
+```
+
+```bash
+python3 scripts/extract_profiles.py \
+  --dataset-root "<DATASET_ROOT>" \
+  --manifest generated/dataset_manifest.json \
+  --output-dir generated
+```
+
+These produce `generated/dataset_manifest.json`, `generated/evidence_manifest.json`, `generated/evidence_assets/`, and `generated/artist_profiles.json`, which the steps below read. None of these commands write to `<DATASET_ROOT>`; the original dataset stays read-only throughout.
+
 ### Generate artist intelligence
 
 Set the Gemini API key in the environment before running the intelligence stage:
@@ -56,6 +82,14 @@ python3 scripts/update_recommendation.py   --original generated/recommendations.
 ```bash
 python3 -m pytest tests/test_recommendation.py -v
 ```
+
+### Run the demo
+
+```bash
+python3 scripts/demo.py
+```
+
+Reads only the three committed files under `generated/` (`artist_intelligence.jsonl`, `recommendations.json`, `updated_recommendation.json`) — no dataset access or API key needed. Runs in under a few seconds and prints: one evidence-backed capability with citations, the initial top-two recommendation for the café brief, the follow-up re-ranking with score-gap interpretation, and one artist's confidence being correctly limited by anomalous (high-silence-ratio) evidence rather than treated as incapability.
 
 ## Approach
 
@@ -105,7 +139,7 @@ Final local result:
 
 The generated initial recommendations contain two artists for each of H081, H082, H083 and H117. The follow-up output contains two artists for H081.
 
-The final artist-intelligence validation covered all 15 artists, verified that every demonstrated capability had evidence, and reported no generation failures in the final combined output.
+The final artist-intelligence validation covered all 15 artists and verified that every demonstrated capability had evidence. One artist (VO5) returned a Gemini-side processing response indicating the supplied evidence could not be read in that run; this is recorded as `insufficient_evidence` across that artist's dimensions rather than silently dropped or treated as a capability judgment, and is called out explicitly in AI_USAGE.md and Limitations below.
 
 ### Time spent
 
@@ -115,7 +149,7 @@ Approximately 5 hours, including implementation, testing, debugging and final ve
 
 Availability, budget acceptance, equipment compatibility and similar operational facts cannot be verified from portfolio evidence and remain human verification tasks.
 
-The supplied dataset contains incomplete or anomalous evidence, so some capabilities remain insufficiently supported and some rankings can remain close. Missing or weak evidence is reported as uncertainty rather than treated as incapability.
+The supplied dataset contains incomplete or anomalous evidence, so some capabilities remain insufficiently supported and some rankings can remain close. Missing or weak evidence is reported as uncertainty rather than treated as incapability. One artist (VO5) produced a Gemini response indicating none of the supplied evidence for that run could be read; this is a known, unresolved limitation of that specific generation run, not a finding about the artist's actual work, and every affected dimension is marked `insufficient_evidence` rather than presented as a negative assessment.
 
 The multimodal model can still return an overly conservative or ambiguous interpretation when evidence quality is poor. The pipeline therefore applies deterministic evidence validation and confidence ceilings rather than accepting model confidence without constraint.
 
