@@ -41,9 +41,9 @@ The final generated JSON outputs were produced by code and were not manually rep
 
 ## API limitation
 
-During development, a Gemini API service/rate-limit error occurred on one configured project/model combination. The generation pipeline retried failed requests, and subsequent required generation completed successfully.
+During development, a Gemini API request failed with an HTTP 503 (Service Unavailable) error on the VO5 (video editor) artist. The generation pipeline retried automatically and received a successful HTTP response with valid JSON on a later attempt, but that response's own content indicated the supplied evidence for VO5 could not be read in that run. As a result, VO5's record has `insufficient_evidence` across all 7 of its standard capability dimensions, with `generation_metadata.status: "ok"` because the API call itself succeeded even though the model reported it could not process the attached media.
 
-The final artist-intelligence output contains 15 successfully generated records, and the final recommendation and follow-up pipelines completed successfully.
+This is disclosed rather than hidden: `insufficient_evidence` is the correct, honest representation of that outcome per this pipeline's own rules (an inability to assess is never presented as a negative capability finding), but it is not the same as a substantive assessment, and I have not yet re-run VO5 to obtain one. All other 14 artist records show substantial demonstrated-capability coverage (4 of 8 to 8 of 8 standard dimensions), and the recommendation and follow-up pipelines completed successfully using the full 15-record intelligence file as-is.
 
 No credentials are included in the repository.
 

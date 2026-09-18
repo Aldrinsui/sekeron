@@ -139,13 +139,11 @@ for cap in m01["demonstrated_capabilities"]:
     )
 
 print("\nEvidence-quality signal:")
-evidence_manifest = load_json("generated/evidence_manifest.json")
-m01_manifest = next(
-    a
-    for a in evidence_manifest["artists"]
-    if a["artist_id"] == "M01"
-)
-
+# Sourced from artist_intelligence.jsonl's own data_quality_observations,
+# not generated/evidence_manifest.json - that file is gitignored/untracked,
+# so depending on it here broke this demo on a fresh clone. This field
+# carries the same anomaly notes (silence-ratio flags etc.) and is always
+# available wherever artist_intelligence.jsonl itself is.
 target_ids = {
     "M01-E004",
     "M01-E008",
@@ -153,12 +151,10 @@ target_ids = {
     "M01-E016",
 }
 
-for evidence in m01_manifest["evidence"]:
-    if evidence["evidence_id"] in target_ids:
-        print(
-            f"  {evidence['evidence_id']}: "
-            f"{evidence.get('anomaly_notes', [])}"
-        )
+for obs in m01["data_quality_observations"]:
+    evidence_id = obs.split(":", 1)[0].strip()
+    if evidence_id in target_ids:
+        print(f"  {obs}")
 
 print("\nResult: anomalous evidence limits confidence rather than")
 print("        being treated as proof of incapability.")
