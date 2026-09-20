@@ -96,7 +96,7 @@ MAX_MODEL_RETRIES = 2
 RETRY_BACKOFF_SECONDS = 5
 
 # Context-efficiency budgets (per artist, per Gemini call)
-IMAGE_CONTEXT_BUDGET_PER_ARTIST = 20   # max images/frames attached; P03's 21 images is the dataset max
+IMAGE_CONTEXT_BUDGET_PER_ARTIST = 20  # max images/frames attached; P03's 21 images is the dataset max
 AHASH_SIZE = 8                          # 8x8 -> 64-bit perceptual hash, using Pillow only (no new dependency)
 AHASH_NEAR_DUP_HAMMING_THRESHOLD = 5    # bits differing; below this, treated as visually near-duplicate
 AUDIO_CONTEXT_SECONDS_BUDGET_PER_ARTIST = 480.0  # 8 min; generous safety cap, not expected to bind on this dataset
